@@ -1,0 +1,1 @@
+export const dbURL:string = 'mongodb://localhost:27017/dataframe';

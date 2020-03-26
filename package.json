@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.ts",
+    "server": "nodemon server.ts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,19 @@
   "bugs": {
     "url": "https://github.com/DaanKort/DataFrame/issues"
   },
-  "homepage": "https://github.com/DaanKort/DataFrame#readme"
+  "homepage": "https://github.com/DaanKort/DataFrame#readme",
+  "dependencies": {
+    "@types/express": "^4.17.3",
+    "@types/mongoose": "^5.7.7",
+    "@types/node": "^12.12.31",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
