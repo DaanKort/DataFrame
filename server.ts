@@ -1,7 +1,7 @@
 import express = require('express');
 import mongoose =  require('mongoose');
 import bodyParser = require('body-parser');
-import { dbURL } from './config/keys';
+import { db_prod_URL } from './config/keys';
 import * as  http from 'http'
 
 const router = require('./routes/api/items');
@@ -10,7 +10,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-mongoose.connect(dbURL)
+mongoose.connect(db_prod_URL)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err))
 
