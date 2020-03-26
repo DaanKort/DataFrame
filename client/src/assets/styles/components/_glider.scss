@@ -1,0 +1,130 @@
+.glider {
+
+  &--home {
+    @for $i from 1 through 7 {
+      .glide#{$i} {
+        background-image: url('../../images/wallpapers/wallpaper#{$i}.jpg');
+      }
+    }
+
+    .glider {
+      &-glide {
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        cursor: grab;
+
+        &:active {
+          cursor: grabbing;
+        }
+      }
+
+      &__overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+        background: $black;
+        opacity: 0.6;
+      }
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        min-height: 250px;
+        padding: 20px 20px 60px 20px;
+
+        @include desktop {
+          min-height: 350px;
+          padding: 80px 40px 60px 40px;
+        }
+        @include desktop-plus {
+          padding-left: 180px;
+        }
+      }
+
+      &__title {
+        border-bottom: 1px solid $white;
+        padding-bottom: 2px;
+        margin-bottom: 10px;
+
+        @include desktop {
+          max-width: 250px;
+        }
+      }
+
+      &__button {
+        margin: 40px auto 0 auto;
+
+        @include desktop {
+          min-width: 200px;
+          margin: auto 0 40px 0;
+        }
+        @include desktop-plus {
+          margin-bottom: 60px;
+        }
+      }
+
+      &__text {
+        @include desktop {
+          max-width: 650px;
+        }
+
+        @include desktop-plus {
+          max-width: 1050px;
+        }
+      }
+    }
+  }
+
+  .slick {
+
+    &-dots {
+      bottom: 20px;
+
+      & > li {
+        border: 2px solid $white;
+        transform: rotate(-45deg);
+        margin: 0 10px;
+        height: 16px;
+        width: 16px;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+
+        & > button {
+          padding: 0;
+
+          &:before {
+            background: $white;
+            content: '';
+            display: block;
+            opacity: 0;
+            height: 10px;
+            width: 10px;
+            top: 3px;
+            left: 3px;
+          }
+        }
+      }
+    }
+
+    &-active {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css?family=Michroma&display=swap");
+
+$font-primary: 'Michroma', 'sans-serif';
+
+h1,
+.h1 {
+  display: block;
+  font-family: $font-primary;
+  font-size: 40px;
+  font-weight: 700;
+  color: $white;
+  letter-spacing: -0.5;
+  line-height: 48px;
+  margin: 0;
+}
+
+h2,
+.h2 {
+  display: block;
+  font-family: $font-primary;
+  font-size: 32px;
+  font-weight: 700;
+  color: $white;
+  letter-spacing: -0.4;
+  line-height: 38px;
+  margin: 0;
+}
+
+h3,
+.h3 {
+  display: block;
+  font-family: $font-primary;
+  font-size: 24px;
+  font-weight: 700;
+  color: $white;
+  letter-spacing: -0.1;
+  line-height: 32px;
+  margin: 0;
+}
+
+h4,
+.h4 {
+  display: block;
+  font-family: $font-primary;
+  font-size: 24px;
+  font-weight: 700;
+  color: $white;
+  letter-spacing: -0.1;
+  line-height: 32px;
+  margin: 0;
+}
+
+h5,
+.h5 {
+  display: block;
+  font-family: $font-primary;
+  font-size: 16px;
+  font-weight: 700;
+  color: $white;
+  letter-spacing: -0.1;
+  line-height: 24px;
+  margin: 0;
+}
+
+h6,
+.h6 {
+  display: block;
+  font-family: $font-primary;
+  font-size: 12px;
+  font-weight: 700;
+  color: $white;
+  line-height: 20px;
+  margin: 0;
+}
+
+p,
+li,
+.paragraph,
+.list-item {
+  font-family: $font-primary;
+  font-size: 16px;
+  color: $white;
+  letter-spacing: -0.1;
+  line-height: 24px;
+  margin: 0;
+}
+
+a,
+.link {
+  font-family: $font-primary;
+  text-decoration: none;
+  color: $white;
+}

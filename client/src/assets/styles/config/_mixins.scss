@@ -1,0 +1,44 @@
+@mixin tablet {
+  @media screen and (min-width: 769px ) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop-plus {
+  @media screen and (min-width: 1441px) {
+    @content;
+  }
+}
+
+@mixin gradient-background ($direction, $transparent: false, $color1: $color1, $color2: $color2, $color3: false) {
+  $colorOption: $white;
+  @if $transparent {
+    background: linear-gradient($direction, $transparent, $color1, $color2);
+  }
+  @if $color3 {
+    background: linear-gradient($direction, $color1, $color2, $color3);
+  }
+  @if $transparent and $color3 {
+    background: linear-gradient($direction, $transparent, $color1, $color2, $color3);
+  }
+}
+
+.boxed {
+  padding: 0 20px;
+
+  @include desktop {
+    padding: 0 60px;
+  }
+
+  @include desktop-plus {
+    max-width: 1440px;
+    padding: 0;
+    margin: auto;
+  }
+}

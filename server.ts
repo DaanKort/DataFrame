@@ -1,7 +1,7 @@
 import express = require('express');
 import mongoose =  require('mongoose');
 import bodyParser = require('body-parser');
-import { dbURL } from './client/config/keys';
+import { dbURL } from './config/keys';
 import * as  http from 'http'
 
 const router = require('./routes/api/items');

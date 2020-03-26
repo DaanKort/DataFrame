@@ -1,0 +1,67 @@
+.cycles {
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include desktop {
+    height: calc(100vh - 80px);
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include desktop {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &-column {
+    @include gradient-background(to bottom, $gold, $white, $secondary);
+
+    padding: 3px;
+    min-width: 250px;
+
+    &:first-of-type {
+      margin-bottom: 20px;
+    }
+
+    @include desktop {
+      &:first-of-type {
+        margin-bottom: 0;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  &-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $dark-grey;
+    padding: 20px;
+  }
+
+  &-content {
+    color: white;
+    text-align: center;
+
+    & > p::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__asset {
+    font-size: 50px;
+    color: $white;
+    margin: 20px 0;
+  }
+}

@@ -1,0 +1,103 @@
+button,
+.button {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  transition: map-get($transitions, "primary");
+  text-decoration: none;
+  padding: 16px 32px;
+  text-align: center;
+  max-width: 124px;
+  overflow: hidden;
+
+  &-primary {
+    background: $dark-grey;
+    color: $white;
+    cursor: pointer;
+
+    & > span {
+      position: absolute;
+      display: block;
+    }
+
+    &:active {
+      box-shadow: 0 0 10px $gold, 0 0 40px $white, 0 0 80px $secondary;
+    }
+
+    &:active {
+      box-shadow: initial;
+    }
+
+    &:hover {
+      color: $white;
+      background: $rose-red;
+      box-shadow: 0 0 10px $rose-red, 0 0 40px $rose-red, 0 0 80px $rose-red;
+      transition-delay: 1s;
+
+      & > span:nth-child(1) {
+        left: 100%;
+        transition: 1s;
+      }
+
+      & > span:nth-child(2) {
+        top: 100%;
+        transition: 1s;
+        transition-delay: 0.25s;
+      }
+
+      & > span:nth-child(3) {
+        right: 100%;
+        transition: 1s;
+        transition-delay: 0.5s;
+      }
+
+      & > span:nth-child(4) {
+        bottom: 100%;
+        transition: 1s;
+        transition-delay: 0.75s;
+      }
+    }
+
+    & > span:nth-child(1)  {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      @include gradient-background (to right, $gold, $white, $secondary);
+    }
+
+    & > span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      @include gradient-background (to bottom, $gold, $white, $secondary);
+    }
+
+    & > span:nth-child(3)  {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      @include gradient-background (to left, $gold, $white, $secondary);
+    }
+
+    & > span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      @include gradient-background (to top, $gold, $white, $secondary);
+    }
+  }
+
+  &-gold {
+    background: $gold-dark;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 10px $gold-dark, 0 0 40px $gold-dark, 0 0 80px $gold-dark;
+    }
+  }
+}

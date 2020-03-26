@@ -1,0 +1,18 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $primary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @include gradient-background(to bottom, $gold, $white, $secondary);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @include gradient-background(to bottom, $gold, $white, $rose-red);
+}
