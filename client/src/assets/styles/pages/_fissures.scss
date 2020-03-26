@@ -1,0 +1,32 @@
+.fissures {
+  margin: 40px auto;
+
+  &-container {
+    @include gradient-background(to right, $gold, $white, $secondary);
+
+    padding: 3px;
+    margin-bottom: 40px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &-inner {
+    background-color: $dark-grey;
+    padding: 20px;
+    position: relative;
+  }
+
+  &__tier {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+  }
+
+  &__eta {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+  }
+}
