@@ -4,7 +4,7 @@ import bodyParser = require('body-parser');
 import { db_prod_URL } from './config/keys';
 import * as  http from 'http'
 
-const router = require('./routes/api/items');
+const router = require('./routes/api/user');
 
 const app = express();
 
@@ -14,7 +14,7 @@ mongoose.connect(db_prod_URL)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err))
 
-app.use('/api/items', router);
+app.use('/api/user', router);
 
 const PORT = process.env.PORT || 8080;
 
