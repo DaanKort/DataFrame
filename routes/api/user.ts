@@ -43,18 +43,18 @@ router.post('/', (req: express.Request, res: express.Response, next: express.Nex
   newUser.lastName = newUser.lastName,
   newUser.password = newUser.generateHash(newUser.password),
   User.find({
-    email: User.email
-  }, (err:any, email:any) => {
+    email: newUser.email
+  }, (err:any, user:any) => {
     if(err) {
       return res.send({
         success: false,
         message: "Error: Server error"
       });
     }
-    if(email.length > 0) {
+    if(user.length > 0) {
       return res.send({
         success: false,
-        message: "Email already exists"
+        message: "User with this email already exists"
       });
     } else {
       newUser.save().then(() => {
