@@ -4,6 +4,7 @@ import { requestWeaponData, requestNews, requestFrameData, requestMods, requestA
 import { IWeapons, INews, IFrames, IMods, IArcanes, IResources, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, ISorties, IFissures } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
+import CardInfo from '../components/card/cardInfo';
 
 export default function Home() {
   const news = useSelector<INews, any>(state => state.news)
@@ -142,7 +143,6 @@ export default function Home() {
           </div>
         </Glider>
         <div className='home-cards boxed'>
-          ...content
         </div>
       </section>
     </>
