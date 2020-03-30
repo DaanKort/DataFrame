@@ -142,7 +142,6 @@ export default function Home() {
           </div>
         </Glider>
         <div className='home-cards boxed'>
-          ...content
         </div>
       </section>
     </>
