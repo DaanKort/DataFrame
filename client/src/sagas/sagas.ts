@@ -28,22 +28,12 @@ import {
   receiveSorties
 } from '../actions/actions';
 
-import { 
-  getWeapons, 
-  getFrames, 
-  getNews, getItems, 
-  getCetusCycle, getVallisCycle, 
-  getAlerts,
-  getEvents,
-  getDailyDeals,
-  getFissures,
-  getSorties
- } from '../api/api'
+import { api } from '../api/api'
 
 function* fetchFrames () {
   try {
-    const frames = yield call(getFrames);
-    yield put(receiveFrameData(frames));
+    const dataObj = yield call(api, 'warframes');
+    yield put(receiveFrameData(dataObj));
   } catch (e) {
     console.log(e);
   }
@@ -51,8 +41,8 @@ function* fetchFrames () {
 
 function* fetchWeapons() {
   try {
-    const weapons = yield call(getWeapons);
-    yield put(receiveWeaponData(weapons));
+    const dataObj = yield call(api, 'weapons');
+    yield put(receiveWeaponData(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -61,8 +51,8 @@ function* fetchWeapons() {
 
 function* fetchNews() {
   try {
-    const news = yield call(getNews);
-    yield put(receivedNews(news));
+    const dataObj = yield call(api, 'pc/news');
+    yield put(receivedNews(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -70,16 +60,8 @@ function* fetchNews() {
 
 function* fetchMods() {
   try {
-    let modData = yield call(getItems);
-    // eslint-disable-next-line
-    let modArray = new Array();
-    modData.map((mods: any) => {
-      if(mods.category === 'Mods') {
-        modArray.push(mods)
-      }
-      return modArray
-    })
-    yield put(receivedMods(modArray));
+    let dataObj = yield call(api, 'items');
+    yield put(receivedMods(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -87,16 +69,8 @@ function* fetchMods() {
 
 function* fetchArcanes() {
   try {
-    let arcaneData = yield call(getItems);
-    // eslint-disable-next-line
-    let arcaneArray = new Array();
-    arcaneData.map((arcane: any) => {
-      if (arcane.category === 'Arcanes') {
-        arcaneArray.push(arcane)
-      }
-      return arcaneArray
-    })
-    yield put(receivedArcanes(arcaneArray));
+    let dataObj = yield call(api, 'arcanes');
+    yield put(receivedArcanes(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -104,10 +78,10 @@ function* fetchArcanes() {
 
 function* fetchResources() {
   try {
-    let resourceData = yield call(getItems);
+    let dataObj = yield call(api, 'items');
     // eslint-disable-next-line
     let resourceArray = new Array();
-    resourceData.map((resource: any) => {
+    dataObj.map((resource: any) => {
       if (resource.category === 'Resources') {
         resourceArray.push(resource)
       }
@@ -121,8 +95,8 @@ function* fetchResources() {
 
 function* fetchCetusCycle() {
   try {
-    const cetusCycle = yield call(getCetusCycle);
-    yield put(receiveCetusCycle(cetusCycle));
+    const dataObj = yield call(api, 'pc/cetusCycle');
+    yield put(receiveCetusCycle(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -130,8 +104,8 @@ function* fetchCetusCycle() {
 
 function* fetchVallisCycle() {
   try {
-    const vallisCycle = yield call(getVallisCycle);
-    yield put(receiveVallisCycle(vallisCycle));
+    const dataObj = yield call(api, 'pc/vallisCycle');
+    yield put(receiveVallisCycle(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -139,8 +113,8 @@ function* fetchVallisCycle() {
 
 function* fetchAlerts() {
   try {
-    const alerts = yield call(getAlerts);
-    yield put(receiveAlerts(alerts));
+    const dataObj = yield call(api, 'pc/alerts');
+    yield put(receiveAlerts(dataObj));
   } catch (e) {
     console.log(e);
   }
@@ -148,8 +122,8 @@ function* fetchAlerts() {
 
 function* fetchEvents() {
   try {
-    const events = yield call(getEvents);
-    yield put(receiveEvents(events))
+    const dataObj = yield call(api, 'pc/events');
+    yield put(receiveEvents(dataObj))
   } catch (e) {
     console.log(e)
   }
@@ -157,8 +131,8 @@ function* fetchEvents() {
 
 function* fetchDeals() {
   try {
-    const deals = yield call(getDailyDeals);
-    yield put(receiveDeals(deals))
+    const dataObj = yield call(api, 'pc/dailyDeals');
+    yield put(receiveDeals(dataObj))
   } catch (e) {
     console.log(e)
   }
@@ -166,8 +140,8 @@ function* fetchDeals() {
 
 function* fetchFissures() {
   try {
-    const fissures = yield call(getFissures);
-    yield put(receiveFissures(fissures))
+    const dataObj = yield call(api, 'pc/fissures');
+    yield put(receiveFissures(dataObj))
   } catch (e) {
     console.log(e)
   }
@@ -175,8 +149,8 @@ function* fetchFissures() {
 
 function* fetchSorties() {
   try {
-    const sorties = yield call(getSorties);
-    yield put(receiveSorties(sorties))
+    const dataObj = yield call(api, 'pc/sortie');
+    yield put(receiveSorties(dataObj))
   } catch (e) {
     console.log(e)
   }

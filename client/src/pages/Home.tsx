@@ -44,7 +44,7 @@ export default function Home() {
   let arcaneData = arcanes.arcanes
   let resourceData = resources.resources
   let cetusCycleData = cetusCycle
-  let vallisCycleData = vallisCycle.vallisCycle
+  let vallisCycleData = vallisCycle
   let alertsData = alerts.alerts
   let eventData = events.events
   let dealsData = deals.deals
