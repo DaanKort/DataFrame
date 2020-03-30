@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { requestWeaponData, requestNews, requestFrameData, requestMods, requestArcanes, requestResources, requestCetusCycle, requestVallisCycle, requestAlerts, requestEvents, requestDeals, requestFissures, requestSorties } from '../actions/actions'
-import { IWeapons, INews, IFrames, IMods, IArcanes, IResources, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, ISorties, IFissures } from '../interfaces/index';
+import { requestWeaponData, requestNews, requestFrameData, requestMods, requestArcanes, requestResources, requestCetusCycle, requestVallisCycle, requestAlerts, requestEvents, requestDeals, requestFissures, requestSorties, requestInvasions } from '../actions/actions'
+import { IWeapons, INews, IFrames, IMods, IArcanes, IResources, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, ISorties, IFissures, IInvasions } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
 
@@ -19,6 +19,7 @@ export default function Home() {
   const deals = useSelector<IDailyDeals, any>(state => state.deals)
   const sorties = useSelector<ISorties, any>(state => state.sorties)
   const fissures = useSelector<IFissures, any>(state => state.fissures)
+  const invasions = useSelector<IInvasions, any>(state => state.invasions)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function Home() {
     dispatch(requestDeals());
     dispatch(requestFissures());
     dispatch(requestSorties());
+    dispatch(requestInvasions());
   }, [dispatch]);
 
   let newsData = news.news
@@ -50,6 +52,7 @@ export default function Home() {
   let dealsData = deals.deals
   let sortiesData = sorties.sorties
   let fissureData = fissures.fissures
+  let invasionsData = invasions.invasions
 
   const gliderSettings = {
     dots: true,

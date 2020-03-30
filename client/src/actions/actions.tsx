@@ -50,6 +50,10 @@ export const REQUEST_SORTIE_DATA = 'REQUEST_SORTIE_DATA'
 export const REQUEST_SORTIE_DATA_FAILED = 'REQUEST_SORTIE_DATA_FAILED'
 export const RECEIVED_SORTIE_DATA = 'RECEIVED_SORTIE_DATA'
 
+export const REQUEST_INVASIONS_DATA = 'REQUEST_INVASIONS_DATA'
+export const REQUEST_INVASIONS_DATA_FAILED = 'REQUEST_INVASIONS_DATA_FAILED'
+export const RECEIVED_INVASIONS_DATA = 'RECEIVED_INVASIONS_DATA'
+
 export const requestFrameData = () => ({ type: REQUEST_FRAME_DATA })
 export const requestFrameDataFailed = () => ({ type: REQUEST_FRAME_DATA_FAILED})
 export const receiveFrameData = (frames: any) => ({ type: RECEIVED_FRAME_DATA, payload: frames })
@@ -101,3 +105,7 @@ export const receiveFissures = (fissures: any) => ({ type: RECEIVED_FISSURE_DATA
 export const requestSorties = () => ({ type: REQUEST_SORTIE_DATA })
 export const requesSortiesFailed = () => ({ type: REQUEST_SORTIE_DATA_FAILED })
 export const receiveSorties = (sorties: any) => ({ type: RECEIVED_SORTIE_DATA, payload: sorties })
+
+export const requestInvasions = () => ({ type: REQUEST_INVASIONS_DATA })
+export const requesInvasionsFailed = () => ({ type: REQUEST_INVASIONS_DATA_FAILED })
+export const receiveInvasions = (invasions: any) => ({ type: RECEIVED_INVASIONS_DATA, payload: invasions })
