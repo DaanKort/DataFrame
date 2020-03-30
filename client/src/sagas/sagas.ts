@@ -28,9 +28,7 @@ import {
   receiveSorties
 } from '../actions/actions';
 
-import {
-  api
-} from '../api/api'
+import { api } from '../api/api'
 
 function* fetchFrames () {
   try {
@@ -63,15 +61,7 @@ function* fetchNews() {
 function* fetchMods() {
   try {
     let dataObj = yield call(api, 'items');
-    // eslint-disable-next-line
-    let modArray = new Array();
-    dataObj.map((mods: any) => {
-      if(mods.category === 'Mods') {
-        modArray.push(mods)
-      }
-      return modArray
-    })
-    yield put(receivedMods(modArray));
+    yield put(receivedMods(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -80,15 +70,7 @@ function* fetchMods() {
 function* fetchArcanes() {
   try {
     let dataObj = yield call(api, 'arcanes');
-    // eslint-disable-next-line
-    let arcaneArray = new Array();
-    dataObj.map((arcane: any) => {
-      if (arcane.category === 'Arcanes') {
-        arcaneArray.push(arcane)
-      }
-      return arcaneArray
-    })
-    yield put(receivedArcanes(arcaneArray));
+    yield put(receivedArcanes(dataObj));
   } catch (e) {
     console.log(e)
   }
@@ -96,7 +78,7 @@ function* fetchArcanes() {
 
 function* fetchResources() {
   try {
-    let dataObj = yield call(api, 'resources');
+    let dataObj = yield call(api, 'items');
     // eslint-disable-next-line
     let resourceArray = new Array();
     dataObj.map((resource: any) => {
@@ -113,7 +95,7 @@ function* fetchResources() {
 
 function* fetchCetusCycle() {
   try {
-    const dataObj = yield call(api, 'cetusCycle');
+    const dataObj = yield call(api, 'pc/cetusCycle');
     yield put(receiveCetusCycle(dataObj));
   } catch (e) {
     console.log(e)
@@ -122,7 +104,7 @@ function* fetchCetusCycle() {
 
 function* fetchVallisCycle() {
   try {
-    const dataObj = yield call(api, 'vallisCycle');
+    const dataObj = yield call(api, 'pc/vallisCycle');
     yield put(receiveVallisCycle(dataObj));
   } catch (e) {
     console.log(e)

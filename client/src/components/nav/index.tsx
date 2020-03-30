@@ -69,7 +69,7 @@ export default function Nav() {
           <FontAwesomeIcon icon={faArrowAltCircleRight} className='nav__arrow' onClick={navToggleDesktop} />
           <Link to='/' className='nav__brand'>
             <img className='nav__logo' src={Brand} alt='brand' />
-            <h5 className='nav__text nav__text--brand'>FrameTrade</h5>
+            <h5 className='nav__text nav__text--brand'>DataFrame</h5>
           </Link>
           <ul className={!navMenu ? 'nav-list' : 'nav-list nav-list--open'}>
             <Link to='/news' className='nav__link'>
