@@ -37,8 +37,8 @@ export default function Home() {
     dispatch(requestSorties());
   }, [dispatch]);
 
-  let weaponData = weapons.weapons
   let newsData = news.news
+  let weaponData = weapons.weapons
   let frameData = frames.frames
   let modData = mods.mods
   let arcaneData = arcanes.arcanes
@@ -50,20 +50,6 @@ export default function Home() {
   let dealsData = deals.deals
   let sortiesData = sorties.sorties
   let fissureData = fissures.fissures
-
-  console.log('News: ', newsData);
-  console.log('Weapons: ', weaponData);
-  console.log('Frames: ', frameData);
-  console.log('Mods: ', modData);
-  console.log('Arcanes: ', arcaneData);
-  console.log('Recources: ', resourceData);
-  console.log('Cetus: ', cetusCycleData);
-  console.log('Vallis: ', vallisCycleData);
-  console.log('Alerts: ', alertsData);
-  console.log('Events: ', eventData);
-  console.log('Deals: ', dealsData);
-  console.log('Fissures: ', fissureData);
-  console.log('Sorties: ', sortiesData);
 
   const gliderSettings = {
     dots: true,
@@ -141,7 +127,15 @@ export default function Home() {
             </div>
           </div>
         </Glider>
-        <div className='home-cards boxed'>
+        <div className='home-news boxed'>
+          {
+            newsData.reverse().slice(0, 2).map((news:any, index:any) => (
+              <div className='home-news__container' key={index}>
+                <img src={news.imageLink} className='home-news__image' alt='asset' />
+                <h5 className='home-news__title'>{news.message}</h5>
+              </div>
+            ))
+          }
         </div>
       </section>
     </>

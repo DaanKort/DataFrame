@@ -14,26 +14,17 @@
     margin: auto 0;
   }
 
-  &-cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
-    grid-gap: 30px 0;
-    margin: 30px auto;
+  &-news {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
 
-    @include desktop {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      grid-gap: 20px;
+    &__image {
+      max-width: 500px;
     }
 
-    .card-info {
-      margin: 0 auto;
-    }
-
-    @include desktop {
-      flex-flow: row wrap;
-      align-items: initial;
+    &__title {
+      text-align: center;
     }
   }
 }
