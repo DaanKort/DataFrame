@@ -12,6 +12,7 @@ import { eventsReducer, EventsState } from './eventsReducer';
 import { dealsReducer, DealsState } from './dealsReducer';
 import { fissuresReducer, FissureState } from './fissuresReducer';
 import { sortieReducer, SortieState } from './sortiesReducer';
+import { invasionsReducer, InvasionsState } from './invasionsReducer';
 
 export interface State {
   news: NewsState
@@ -27,6 +28,7 @@ export interface State {
   deals: DealsState
   fissures: FissureState
   sorties: SortieState
+  invasions: InvasionsState
 }
 
 export const rootReducer = combineReducers<State>({
@@ -42,6 +44,7 @@ export const rootReducer = combineReducers<State>({
   events: eventsReducer,
   deals: dealsReducer,
   fissures: fissuresReducer,
-  sorties: sortieReducer 
+  sorties: sortieReducer,
+  invasions: invasionsReducer
 });
 
