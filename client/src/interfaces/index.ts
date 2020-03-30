@@ -109,3 +109,11 @@ export interface ISorties {
   payload?: any,
   errorMessage: string
 }
+
+export interface IInvasions {
+  invasions: [],
+  type: string,
+  isLoading: boolean,
+  payload?: any,
+  errorMessage: string
+}

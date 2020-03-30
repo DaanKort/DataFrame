@@ -25,7 +25,9 @@ import {
   REQUEST_FISSURE_DATA,
   receiveFissures,
   REQUEST_SORTIE_DATA,
-  receiveSorties
+  receiveSorties,
+  REQUEST_INVASIONS_DATA,
+  receiveInvasions
 } from '../actions/actions';
 
 import { api } from '../api/api'
@@ -156,6 +158,15 @@ function* fetchSorties() {
   }
 }
 
+function* fetchInvasions() {
+  try {
+    const dataObj = yield call(api, 'pc/invasions');
+    yield put(receiveInvasions(dataObj))
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export default function* mySaga() {
   yield takeLatest(REQUEST_WEAPON_DATA, fetchWeapons);
   yield takeLatest(REQUEST_FRAME_DATA, fetchFrames);
@@ -170,4 +181,5 @@ export default function* mySaga() {
   yield takeLatest(REQUEST_DEALS_DATA, fetchDeals);
   yield takeLatest(REQUEST_FISSURE_DATA, fetchFissures);
   yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
+  yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
 }
