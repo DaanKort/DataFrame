@@ -1,58 +1,56 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { requestWeaponData, requestNews, requestFrameData, requestMods, requestArcanes, requestResources, requestCetusCycle, requestVallisCycle, requestAlerts, requestEvents, requestDeals, requestFissures, requestSorties, requestInvasions } from '../actions/actions'
-import { IWeapons, INews, IFrames, IMods, IArcanes, IResources, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, ISorties, IFissures, IInvasions } from '../interfaces/index';
+import { requestNews, requestCetusCycle, requestVallisCycle, requestAlerts, requestEvents, requestDeals, requestFissures, requestInvasions } from '../actions/actions'
+import { INews, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, IFissures, IInvasions } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
 
 export default function Home() {
   const news = useSelector<INews, any>(state => state.news)
-  const weapons = useSelector<IWeapons, any>(state => state.weapons)
-  const frames = useSelector<IFrames, any>(state => state.frames)
-  const mods = useSelector<IMods, any>(state => state.mods)
-  const arcanes = useSelector<IArcanes, any>(state => state.arcanes)
-  const resources = useSelector<IResources, any>(state => state.resources)
   const cetusCycle = useSelector<ICetusCycle, any>(state => state.cetusCycle)
   const vallisCycle = useSelector<IVallisCycle, any>(state => state.vallisCycle)
   const alerts = useSelector<IAlerts, any>(state => state.alerts)
   const events = useSelector<IEvents, any>(state => state.events)
   const deals = useSelector<IDailyDeals, any>(state => state.deals)
-  const sorties = useSelector<ISorties, any>(state => state.sorties)
   const fissures = useSelector<IFissures, any>(state => state.fissures)
   const invasions = useSelector<IInvasions, any>(state => state.invasions)
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(requestNews());
-    dispatch(requestWeaponData());
-    dispatch(requestFrameData());
-    dispatch(requestMods());
-    dispatch(requestArcanes());
-    dispatch(requestResources());
     dispatch(requestCetusCycle());
     dispatch(requestVallisCycle());
     dispatch(requestAlerts());
     dispatch(requestEvents());
     dispatch(requestDeals());
     dispatch(requestFissures());
-    dispatch(requestSorties());
     dispatch(requestInvasions());
   }, [dispatch]);
 
-  let newsData = news.news
-  let weaponData = weapons.weapons
-  let frameData = frames.frames
-  let modData = mods.mods
-  let arcaneData = arcanes.arcanes
-  let resourceData = resources.resources
-  let cetusCycleData = cetusCycle
-  let vallisCycleData = vallisCycle
-  let alertsData = alerts.alerts
-  let eventData = events.events
-  let dealsData = deals.deals
-  let sortiesData = sorties.sorties
-  let fissureData = fissures.fissures
-  let invasionsData = invasions.invasions
+  let newsData = news.news;
+  let cetusCycleData = cetusCycle;
+  let vallisCycleData = vallisCycle;
+  let alertsData = alerts.alerts;
+  let eventData = events.events;
+  let dealsData = deals.deals;
+  let fissureData = fissures.fissures;
+  let invasionsData = invasions.invasions;
+
+  (() => {
+    for (let i = invasionsData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [invasionsData[i], invasionsData[j]] = [invasionsData[j], invasionsData[i]];
+    }
+    return invasionsData;
+  })();
+
+  (() => {
+    for (let i = fissureData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [fissureData[i], fissureData[j]] = [fissureData[j], fissureData[i]];
+    }
+    return fissureData;
+  })();
 
   const gliderSettings = {
     dots: true,
@@ -130,7 +128,7 @@ export default function Home() {
             </div>
           </div>
         </Glider>
-        <div className='home-news boxed'>
+        <div className='home-news home--spacing boxed'>
           {
             newsData.reverse().slice(0, 2).map((news:any, index:any) => (
               <div className='home-news__container' key={index}>
@@ -139,6 +137,62 @@ export default function Home() {
               </div>
             ))
           }
+        </div>
+        <div className='home-invasions'>
+          <div className='home-invasions__wrapper boxed'>
+            {
+              invasionsData.slice(0, 3).map((invasion:any, index:any) => (
+                <div className='home-invasions__container' key={index}>
+                  <h4 className='home-invasions__node'>{invasion.node}</h4>
+                  <h5 className='home-invasions__desc'>{invasion.desc}</h5>
+                  <h6 className='home-invasions__eta'>{invasion.eta}</h6>
+                  <div className='home-invasions-sides'>
+                      {
+                        invasion.attackerReward.itemString && (
+                          <div className='home-invasions__side'>
+                            <img src={invasion.attackerReward.thumbnail} className='home-invasions__image' alt='asset' />
+                            <h5>Attack Reward:</h5>
+                            <h6>{invasion.attackerReward.itemString}</h6>
+                          </div>
+                        )
+                      }
+                      {
+                        invasion.defenderReward.itemString && (
+                          <div className='home-invasions__side'>
+                            <img src={invasion.defenderReward.thumbnail} className='home-invasions__image' alt='asset' />
+                            <h5>Defend Reward:</h5>
+                            <h6>{invasion.defenderReward.itemString}</h6>
+                          </div>
+                        )
+                      }
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div className='home-invasions__wrap'>
+            <Button buttonText='Visit' buttonLink='/invasions' buttonClass='button-gold home-invasions__button' />
+          </div>
+        </div>
+        <div className='home-fissures home--spacing boxed'>
+          {console.log(fissureData)}
+          {
+            fissureData.slice(0, 3).map((fissure:any, index:any) => (
+              <div className='home-fissures__container' key={index}>
+                <div className='home-fissures__wrapper'>
+                  <h5>{fissure.node}</h5>
+                  <h5>{fissure.tier} T{fissure.tierNum}</h5>
+                  <h6>{fissure.missionType} - {fissure.enemy}</h6>
+                  <h6>{fissure.eta}</h6>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div className='home-alerts home--spacing'>
+          <div className='home-alerts__wrapper boxed'>
+            ..alerts
+          </div>
         </div>
       </section>
     </>
