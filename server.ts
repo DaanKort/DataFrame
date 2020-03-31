@@ -1,20 +1,26 @@
 import express = require('express');
 import mongoose =  require('mongoose');
-import bodyParser = require('body-parser');
-import { db_prod_URL } from './config/keys';
 import * as  http from 'http'
+import config = require('config')
 
-const router = require('./routes/api/user');
+
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-mongoose.connect(db_prod_URL)
+const db_url = config.get('db_prod_URL')
+
+mongoose.connect(db_url, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    })  
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err))
 
-app.use('/api/user', router);
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 const PORT = process.env.PORT || 8080;
 

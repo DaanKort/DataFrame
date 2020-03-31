@@ -7,13 +7,13 @@ import bcrypt = require('bcrypt');
 
 const User = require('../../models/User');
 
-//@route POST api/user
+//@route POST api/auth
 router.post('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
 
-  const { firstName, lastName, email, password } = req.body;
+  const {  email, password } = req.body;
 
   //Field validation
-  if (!firstName || !lastName || !email || !password) {
+  if (!email || !password) {
     return res.status(400).json({
       message: 'Please enter all fields.'
     })
@@ -21,23 +21,14 @@ router.post('/', (req: express.Request, res: express.Response, next: express.Nex
 
   //Check for existing user 
   User.findOne({ email }).then(user => {
-    if (user) return res.status(400).json({ message: "User with this email already exists" })
+    if (!user) return res.status(400).json({ message: "User does not exist" })
 
-    const newUser = new User({
-      firstName,
-      lastName,
-      email,
-      password
-    });
+    //Password validation   
+    bcrypt.compare(password, user.password)
+    .then(isMatch => {
+        if(!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    //Has password
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err:any, hash) => {
-        if(err) throw err;
-        newUser.password = hash;
-        newUser.save()
-        .then(user => {
-          jwt.sign(
+        jwt.sign(
             { id: user._id },
             config.get('jwtSecret'),
             { expiresIn: 3600 },
@@ -46,17 +37,16 @@ router.post('/', (req: express.Request, res: express.Response, next: express.Nex
               res.json({
                 token,
                 user: {
-                  id: user._id,
-                  name: user.name,
-                  email: user.email
+                    id: user._id,
+                    name: user.name,
+                    email: user.email
                 },
-                message: "Signed in!"
+                message: "Signed up!"
               });
             }
-          );
-        });
-      });
-    });
+          )
+    })
+    
   })
 });
 module.exports = router;
