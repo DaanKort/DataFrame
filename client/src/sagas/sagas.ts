@@ -29,10 +29,15 @@ import {
   REQUEST_INVASIONS_DATA,
   receiveInvasions,
   REQUEST_LOGIN,
-  receiveLogin
+  receiveLogin,
+  authError
 } from "../actions/actions";
 
+import { IAction } from "../interfaces";
+
 import { api, Login } from "../api/api";
+import jwt from "jsonwebtoken";
+import { response } from "express";
 
 function* fetchFrames() {
   try {
@@ -168,19 +173,17 @@ function* fetchInvasions() {
   }
 }
 
-function* callRequestLogin() {
-  let results = yield call(Login);
-  results = JSON.parse(results);
-  console.log(results);
-  // if(typeof results.token == typeof undefined){
-  //     yield put(recieveLoginError(results));
-  // }
-  // const token = results.token
-  // localStorage.setItem('jwtToken', token)
-  // setAuth(token);
-  // const Tokendecode = yield jwt.decode(token)
-  // localStorage.setItem('User', Tokendecode.sub)
-  // yield put(recieveLogin(Tokendecode));
+function* callRequestLogin(action: IAction) {
+  let results = yield call(Login, action.payload);
+  results = response.json(results);
+  if (typeof results.token == typeof undefined) {
+    yield put(authError(results));
+  }
+  const token = results.token;
+  localStorage.setItem("jwtToken", token);
+  const Tokendecode = yield jwt.decode(token);
+  localStorage.setItem("User", Tokendecode);
+  yield put(receiveLogin(Tokendecode));
 }
 
 export default function* mySaga() {

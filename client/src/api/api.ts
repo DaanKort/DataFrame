@@ -1,3 +1,5 @@
+import { IUser } from "../interfaces";
+
 const baseUrl = "https://api.warframestat.us/";
 export const api = async (endpoint: string): Promise<any> => {
   try {
@@ -8,18 +10,18 @@ export const api = async (endpoint: string): Promise<any> => {
   }
 };
 
-export const Login = async () => {
+export const Login = async (user: IUser) => {
   try {
-    // return await fetch("http://localhost:8080/api/auth/user", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     email: user.email,
-    //     firstName: user.firstName
-    //   })
-    // });
+    return await fetch("http://localhost:8080/api/auth/user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        email: user.email,
+        firstName: user.firstName
+      })
+    });
   } catch (e) {
     console.log(e);
   }

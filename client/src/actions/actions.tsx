@@ -59,9 +59,13 @@ export const RECEIVED_INVASIONS_DATA = "RECEIVED_INVASIONS_DATA";
 export const REQUEST_LOGIN = "REQUEST_LOGIN";
 export const REQUEST_LOGIN_SUCCESS = "REQUEST_LOGIN_SUCCESS";
 export const REQUEST_LOGIN_FAILED = "REQUEST_LOGIN_FAILED";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILED = "LOGIN_FAILED";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REQUEST_REGISTER = "REQUEST_REGISTER";
 export const REQUEST_REGISTER_SUCCESS = "REQUEST_REGISTER_SUCCESS";
+export const REQUEST_REGISTER_FAILED = "REQUEST_REGISTER_FAILED";
+export const AUTH_ERROR = "AUTH_ERROR";
 
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
@@ -185,8 +189,18 @@ export const receiveLogin = (user: any) => ({
   type: REQUEST_LOGIN_SUCCESS,
   payload: user
 });
+export const loginSuccess = () => ({ type: LOGIN_SUCCESS });
+export const loginFailed = () => ({ type: LOGIN_FAILED });
+export const requestLoginFailed = () => ({ type: REQUEST_LOGIN_FAILED });
 
-export const loginFailed = () => ({ REQUEST_LOGIN_FAILED });
+export const requestRegister = () => ({ type: REQUEST_REGISTER });
+export const receiveRegister = () => ({ type: REQUEST_REGISTER_SUCCESS });
+export const receiveRegisterFailed = () => ({ type: REQUEST_REGISTER_FAILED });
 
-export const getErrors = () => ({ GET_ERRORS });
-export const clearErrors = () => ({ CLEAR_ERRORS });
+export const authError = (results: any) => ({
+  type: AUTH_ERROR,
+  payload: results
+});
+
+export const getErrors = () => ({ type: GET_ERRORS });
+export const clearErrors = () => ({ type: CLEAR_ERRORS });

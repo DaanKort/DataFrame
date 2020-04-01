@@ -1,3 +1,5 @@
+import { REQUEST_LOGIN } from "../actions/actions";
+
 export interface IWeapons {
   weapons: [];
   type: string;
@@ -128,6 +130,11 @@ export interface IUser {
   isLoading: false;
   type: string;
   token: string | null;
+}
+
+export interface IAction {
+  type: typeof REQUEST_LOGIN,
+  payload: IUser;
 }
 
 export interface IError {
