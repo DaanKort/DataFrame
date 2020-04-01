@@ -4,6 +4,8 @@ import { requestNews, requestCetusCycle, requestVallisCycle, requestAlerts, requ
 import { INews, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, IFissures, IInvasions } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const news = useSelector<INews, any>(state => state.news)
@@ -141,7 +143,7 @@ export default function Home() {
         <div className='home-invasions'>
           <div className='home-invasions__wrapper boxed'>
             {
-              invasionsData.slice(0, 3).map((invasion:any, index:any) => (
+              invasionsData.slice(0, 2).map((invasion:any, index:any) => (
                 <div className='home-invasions__container' key={index}>
                   <h4 className='home-invasions__node'>{invasion.node}</h4>
                   <h5 className='home-invasions__desc'>{invasion.desc}</h5>
@@ -191,7 +193,18 @@ export default function Home() {
         </div>
         <div className='home-alerts home--spacing'>
           <div className='home-alerts__wrapper boxed'>
-            ..alerts
+              {alertsData.length === 0 ? (
+                <div className='home-alerts__empty'>
+                  <FontAwesomeIcon icon={faExclamationTriangle} className='home-alerts__icon' />
+                  <h4>There are no alerts at the moment!</h4>
+                </div>
+              ) : (
+                alertsData.map((alert:any, index:any) => (
+                  <div className='home-alerts__data' key={index}>
+                    ...alerts
+                  </div>
+                ))
+              )}
           </div>
         </div>
       </section>

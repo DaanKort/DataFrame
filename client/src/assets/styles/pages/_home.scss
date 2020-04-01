@@ -146,7 +146,7 @@
       }
 
       @include desktop {
-        min-width: 300px;
+        min-width: 260px;
 
         &:nth-child(n+2) {
           margin-top: 0;
@@ -165,6 +165,29 @@
       h6:first-of-type {
         margin-top: 20px;
       }
+    }
+  }
+
+  &-alerts {
+    background: $primary;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    &__wrapper,
+    &__empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h4 {
+      text-align: center;
+    }
+
+    &__icon {
+      color: $white;
+      font-size: 50px;
+      margin-bottom: 20px;
     }
   }
 
