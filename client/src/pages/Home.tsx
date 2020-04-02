@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { requestNews, requestCetusCycle, requestVallisCycle, requestAlerts, requestEvents, requestDeals, requestFissures, requestInvasions } from '../actions/actions'
-import { INews, ICetusCycle, IVallisCycle, IAlerts, IEvents, IDailyDeals, IFissures, IInvasions } from '../interfaces/index';
+import { requestNews, requestAlerts, requestFissures, requestInvasions } from '../actions/actions'
+import { INews, IAlerts, IFissures, IInvasions } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,32 +12,20 @@ import Mutagen from '../assets/images/mutagen.png';
 
 export default function Home() {
   const news = useSelector<INews, any>(state => state.news)
-  const cetusCycle = useSelector<ICetusCycle, any>(state => state.cetusCycle)
-  const vallisCycle = useSelector<IVallisCycle, any>(state => state.vallisCycle)
   const alerts = useSelector<IAlerts, any>(state => state.alerts)
-  const events = useSelector<IEvents, any>(state => state.events)
-  const deals = useSelector<IDailyDeals, any>(state => state.deals)
   const fissures = useSelector<IFissures, any>(state => state.fissures)
   const invasions = useSelector<IInvasions, any>(state => state.invasions)
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(requestNews());
-    dispatch(requestCetusCycle());
-    dispatch(requestVallisCycle());
     dispatch(requestAlerts());
-    dispatch(requestEvents());
-    dispatch(requestDeals());
     dispatch(requestFissures());
     dispatch(requestInvasions());
   }, [dispatch]);
 
   let newsData = news.news;
-  let cetusCycleData = cetusCycle;
-  let vallisCycleData = vallisCycle;
   let alertsData = alerts.alerts;
-  let eventData = events.events;
-  let dealsData = deals.deals;
   let fissureData = fissures.fissures;
   let invasionsData = invasions.invasions;
 
