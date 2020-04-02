@@ -31,7 +31,7 @@ router.post("/", (req: express.Request, res: express.Response) => {
       password
     });
 
-    //Has password
+    //Hash password
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(newUser.password, salt, (err: any, hash) => {
         if (err) throw err;

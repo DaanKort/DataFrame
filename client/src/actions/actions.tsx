@@ -1,3 +1,5 @@
+import { createAction } from "redux-actions";
+
 export const REQUEST_FRAME_DATA = "REQUEST_FRAME_DATA";
 export const REQUEST_FRAME_DATA_FAILED = "REQUEST_FRAME_DATA_FAILED";
 export const RECEIVED_FRAME_DATA = "RECEIVED_FRAME_DATA";
@@ -59,8 +61,7 @@ export const RECEIVED_INVASIONS_DATA = "RECEIVED_INVASIONS_DATA";
 export const REQUEST_LOGIN = "REQUEST_LOGIN";
 export const REQUEST_LOGIN_SUCCESS = "REQUEST_LOGIN_SUCCESS";
 export const REQUEST_LOGIN_FAILED = "REQUEST_LOGIN_FAILED";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILED = "LOGIN_FAILED";
+
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REQUEST_REGISTER = "REQUEST_REGISTER";
 export const REQUEST_REGISTER_SUCCESS = "REQUEST_REGISTER_SUCCESS";
@@ -183,17 +184,17 @@ export const receiveInvasions = (invasions: any) => ({
   type: RECEIVED_INVASIONS_DATA,
   payload: invasions
 });
-
-export const requestLogin = () => ({ type: REQUEST_LOGIN });
-export const receiveLogin = (user: any) => ({
-  type: REQUEST_LOGIN_SUCCESS,
+export const loginTest = (user: any) => ({
+  type: RECEIVED_INVASIONS_DATA,
   payload: user
 });
-export const loginSuccess = () => ({ type: LOGIN_SUCCESS });
-export const loginFailed = () => ({ type: LOGIN_FAILED });
-export const requestLoginFailed = () => ({ type: REQUEST_LOGIN_FAILED });
 
-export const requestRegister = () => ({ type: REQUEST_REGISTER });
+export const requestLogin = createAction(REQUEST_LOGIN);
+export const receiveLogin = createAction(REQUEST_LOGIN_SUCCESS);
+
+export const requestLoginFailed = createAction(REQUEST_LOGIN_FAILED);
+
+export const requestRegister = createAction(REQUEST_REGISTER);
 export const receiveRegister = () => ({ type: REQUEST_REGISTER_SUCCESS });
 export const receiveRegisterFailed = () => ({ type: REQUEST_REGISTER_FAILED });
 

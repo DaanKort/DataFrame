@@ -14,7 +14,6 @@ import { fissuresReducer, FissureState } from "./fissuresReducer";
 import { sortieReducer, SortieState } from "./sortiesReducer";
 import { invasionsReducer, InvasionsState } from "./invasionsReducer";
 import { authReducer, AuthState } from "./authReducer";
-import { errorReducer, ErrorState } from "./errorReducer";
 
 export interface State {
   news: NewsState;

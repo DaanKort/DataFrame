@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, takeLatest, call, takeEvery } from "redux-saga/effects";
 import {
   REQUEST_WEAPON_DATA,
   receiveWeaponData,
@@ -30,14 +30,15 @@ import {
   receiveInvasions,
   REQUEST_LOGIN,
   receiveLogin,
-  authError
+  authError,
+  requestLoginFailed
 } from "../actions/actions";
-
-import { IAction } from "../interfaces";
 
 import { api, Login } from "../api/api";
 import jwt from "jsonwebtoken";
-import { response } from "express";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { IAction } from "../interfaces";
 
 function* fetchFrames() {
   try {
@@ -175,15 +176,19 @@ function* fetchInvasions() {
 
 function* callRequestLogin(action: IAction) {
   let results = yield call(Login, action.payload);
-  results = response.json(results);
+  results = JSON.parse(results);
   if (typeof results.token == typeof undefined) {
-    yield put(authError(results));
+    yield put(requestLoginFailed(results));
   }
   const token = results.token;
   localStorage.setItem("jwtToken", token);
   const Tokendecode = yield jwt.decode(token);
   localStorage.setItem("User", Tokendecode);
   yield put(receiveLogin(Tokendecode));
+}
+
+export function* requestLoginSaga() {
+  yield takeEvery(REQUEST_LOGIN, callRequestLogin);
 }
 
 export default function* mySaga() {
