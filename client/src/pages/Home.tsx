@@ -179,9 +179,9 @@ export default function Home() {
               <div className='home-invasions__collage'>
                 <div className='home-invasions__inner'>
                   <h4>Potential Rewards:</h4>
-                  <img src={Injector} className='home-invasions__image' />
-                  <img src={Fieldron} className='home-invasions__image' />
-                  <img src={Mutagen} className='home-invasions__image' />
+                  <img src={Injector} className='home-invasions__image' alt='asset'/>
+                  <img src={Fieldron} className='home-invasions__image' alt='asset'/>
+                  <img src={Mutagen} className='home-invasions__image' alt='asset'/>
                 </div>
               </div>
             </div>
