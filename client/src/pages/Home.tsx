@@ -209,6 +209,7 @@ export default function Home() {
               ))
             }
           </div>
+          <Button buttonText='Visit' buttonLink='/fissures' buttonClass='button-gold home-fissures__button' />
         </div>
       </section>
     </>
