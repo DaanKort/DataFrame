@@ -135,6 +135,7 @@ export default function Home() {
         </Glider>
         <div className='home-duo home--spacing boxed'>
           <div className='home-side'>
+            <h4 className='home-side__title'>Latest News:</h4>
             {
               newsData.reverse().slice(0, 1).map((news:any, index:any) => (
                 <div className='home-side__container' key={index}>
@@ -199,8 +200,8 @@ export default function Home() {
               fissureData.slice(0, 3).map((fissure:any, index:any) => (
                 <div className='home-fissures__container' key={index}>
                   <div className='home-fissures__wrapper'>
-                    <h5>{fissure.node}</h5>
                     <h5>{fissure.tier} T{fissure.tierNum}</h5>
+                    <h6>{fissure.node}</h6>
                     <h6>{fissure.missionType} - {fissure.enemy}</h6>
                     <h6>{fissure.eta}</h6>
                   </div>
