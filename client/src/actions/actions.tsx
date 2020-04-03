@@ -184,10 +184,8 @@ export const receiveInvasions = (invasions: any) => ({
   type: RECEIVED_INVASIONS_DATA,
   payload: invasions
 });
-export const loginTest = (user: any) => ({
-  type: RECEIVED_INVASIONS_DATA,
-  payload: user
-});
+
+// Above actions need refactor aswell ^
 
 export const requestLogin = createAction(REQUEST_LOGIN);
 export const receiveLogin = createAction(REQUEST_LOGIN_SUCCESS);
@@ -195,13 +193,10 @@ export const receiveLogin = createAction(REQUEST_LOGIN_SUCCESS);
 export const requestLoginFailed = createAction(REQUEST_LOGIN_FAILED);
 
 export const requestRegister = createAction(REQUEST_REGISTER);
-export const receiveRegister = () => ({ type: REQUEST_REGISTER_SUCCESS });
-export const receiveRegisterFailed = () => ({ type: REQUEST_REGISTER_FAILED });
+export const receiveRegister = createAction(REQUEST_REGISTER_SUCCESS);
+export const receiveRegisterFailed = createAction(REQUEST_REGISTER_FAILED);
 
-export const authError = (results: any) => ({
-  type: AUTH_ERROR,
-  payload: results
-});
+export const authError = createAction(AUTH_ERROR);
 
-export const getErrors = () => ({ type: GET_ERRORS });
-export const clearErrors = () => ({ type: CLEAR_ERRORS });
+export const getErrors = createAction(GET_ERRORS);
+export const clearErrors = createAction(CLEAR_ERRORS);
