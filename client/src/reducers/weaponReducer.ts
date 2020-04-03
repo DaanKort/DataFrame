@@ -1,36 +1,36 @@
-import { IWeapons } from '../interfaces';
+import { IWeapons } from "../interfaces";
 
 const defaultState: IWeapons = {
   weapons: [],
-  type: '',
-  errorMessage: '',
+  type: "",
+  errorMessage: "",
   isLoading: false
-}
+};
 
-export type WeaponState = {}
+export type WeaponState = {};
 
-export const weaponReducer =  (
+export const weaponReducer = (
   state: WeaponState = defaultState,
   action: IWeapons
-  ) => {
+) => {
   switch (action.type) {
-    case 'REQUEST_WEAPON_DATA':
+    case "REQUEST_WEAPON_DATA":
       return {
         ...state,
         isLoading: true
       };
-    case 'RECEIVED_WEAPON_DATA':
+    case "RECEIVED_WEAPON_DATA":
       return {
         ...state,
         isLoading: false,
-        weapons: action.payload,
+        weapons: action.payload
       };
-    case 'REQUEST_WEAPON_DATA_FAILED':
+    case "REQUEST_WEAPON_DATA_FAILED":
       return {
         ...state,
-        errorMessage: 'Gaat nie goed he'
+        errorMessage: "Gaat nie goed he"
       };
     default:
       return state;
   }
-}
+};

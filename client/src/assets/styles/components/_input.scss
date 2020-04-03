@@ -2,30 +2,20 @@
   display: block;
   background-color: $primary;
   border: 0;
-  padding: 5px;
   color: $white;
   font-family: $font-primary;
+  width: calc(100% - 12px);
+  padding: 5px;
+  font-size: 20px;
 
   &:focus {
     outline: 0;
   }
 
-  &--home {
-    width: calc(100% - 20px);
-    padding: 10px;
-    font-size: 20px;
-  }
-
   &-wrapper {
     @include gradient-background(to right, $gold, $white, $secondary);
-    padding: 3px;
-    border-radius: 3px;
-    height: fit-content;
-    max-width: 194px;
 
-    &--home {
-      margin: 40px 0;
-      max-width: 200px;
-    }
+    padding: 3px;
+    max-width: 200px;
   }
 }

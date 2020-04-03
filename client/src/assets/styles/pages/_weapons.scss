@@ -1,0 +1,32 @@
+.weapons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 80px;
+
+  @include desktop {
+    flex-flow: row wrap;
+  }
+
+  &__title {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  &__input {
+    margin: 40px auto;
+  }
+
+  .card-preview {
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    @include desktop {
+      margin: 20px;
+    }
+  }
+}
