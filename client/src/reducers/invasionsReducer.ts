@@ -1,6 +1,6 @@
-import { IInvasions } from '../interfaces';
+import { IInvasionsState } from '../interfaces';
 
-const defaultState: IInvasions = {
+const defaultState: IInvasionsState = {
   invasions: [],
   type: '',
   errorMessage: '',
@@ -11,7 +11,7 @@ export type InvasionsState = {}
 
 export const invasionsReducer =  (
     state: InvasionsState = defaultState,
-    action: IInvasions
+    action: IInvasionsState
 ) => {
     switch (action.type) {
       case 'REQUEST_INVASIONS_DATA':

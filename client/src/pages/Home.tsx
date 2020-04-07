@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { requestNews, requestAlerts, requestFissures, requestInvasions } from '../actions/actions'
-import { INews, IAlerts, IFissures, IInvasions } from '../interfaces/index';
+import { INews, INewsState, IAlerts, IAlertsState, IFissures, IInvasions, IInvasionsState, IFissuresState } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,10 +11,10 @@ import Fieldron from '../assets/images/fieldron.png';
 import Mutagen from '../assets/images/mutagen.png';
 
 export default function Home() {
-  const news = useSelector<INews, any>(state => state.news)
-  const alerts = useSelector<IAlerts, any>(state => state.alerts)
-  const fissures = useSelector<IFissures, any>(state => state.fissures)
-  const invasions = useSelector<IInvasions, any>(state => state.invasions)
+  const news = useSelector<INewsState, any>(state => state.news)
+  const alerts = useSelector<IAlertsState, any>(state => state.alerts)
+  const fissures = useSelector<IFissuresState, any>(state => state.fissures)
+  const invasions = useSelector<IInvasionsState, any>(state => state.invasions)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function Home() {
           <div className='home-side'>
             <h4 className='home-side__title'>Latest News:</h4>
             {
-              newsData.reverse().slice(0, 1).map((news:any, index:any) => (
+              newsData.reverse().slice(0, 1).map((news:INews, index:number) => (
                 <div className='home-side__container' key={index}>
                   <img src={news.imageLink} className='home-side__image' alt='asset' />
                   <h5 className='home-side__title'>{news.message}</h5>
@@ -140,9 +140,10 @@ export default function Home() {
                 <h4>There are no alerts at the moment!</h4>
               </div>
             ) : (
-              alertsData.map((alert:any, index:any) => (
+              alertsData.map((alert:IAlerts, index:number) => (
                 <div className='home-side__data' key={index}>
-                  ...alerts
+                  <h4>{alert.node}</h4>
+                  <h5>{alert.faction}</h5>
                 </div>
               ))
             )}
@@ -155,7 +156,7 @@ export default function Home() {
             <div className='home-invasions__layout'>
               <div className='home-invasions__info'>
                 {
-                  invasionsData.slice(0, 4).map((invasion:any, index:any) => (
+                  invasionsData.slice(0, 4).map((invasion:IInvasions, index:number) => (
                     <div className='home-invasions__container' key={index}>
                       <h4 className='home-invasions__node'>{invasion.node}</h4>
                       <h5 className='home-invasions__desc'>{invasion.desc}</h5>
@@ -185,7 +186,7 @@ export default function Home() {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
           <div className='home-fissures__layout'>
             {
-              fissureData.slice(0, 3).map((fissure:any, index:any) => (
+              fissureData.slice(0, 3).map((fissure:IFissures, index:number) => (
                 <div className='home-fissures__container' key={index}>
                   <div className='home-fissures__wrapper'>
                     <h5>{fissure.tier} T{fissure.tierNum}</h5>

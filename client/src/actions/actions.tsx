@@ -1,3 +1,5 @@
+import { INewsState, IInvasionsState, IAlertsState, IFissuresState } from '../interfaces/index'
+
 export const REQUEST_FRAME_DATA = 'REQUEST_FRAME_DATA'
 export const REQUEST_FRAME_DATA_FAILED = 'REQUEST_FRAME_DATA_FAILED'
 export const RECEIVED_FRAME_DATA = 'RECEIVED_FRAME_DATA'
@@ -64,7 +66,7 @@ export const receiveWeaponData = (weapons: any) => ({ type: RECEIVED_WEAPON_DATA
 
 export const requestNews = () => ({ type: REQUEST_NEWS_DATA })
 export const requestNewsFailed = () => ({ type: REQUEST_NEWS_DATA_FAILED })
-export const receivedNews = (news: any) => ({ type: RECEIVED_NEWS_DATA, payload: news })
+export const receivedNews = (news: INewsState) => ({ type: RECEIVED_NEWS_DATA, payload: news })
 
 export const requestMods = () => ({ type: REQUEST_MOD_DATA })
 export const requestModsFailed = () => ({ type: REQUEST_MOD_DATA_FAILED })
@@ -88,7 +90,7 @@ export const receiveVallisCycle = (vallisCycle: any) => ({ type: RECEIVED_VALLIS
 
 export const requestAlerts = () => ({ type: REQUEST_ALERTS_DATA })
 export const requestAlertsFailed = () => ({ type: REQUEST_ALERTS_DATA_FAILED })
-export const receiveAlerts = (alerts: any) => ({ type: RECEIVED_ALERTS_DATA, payload: alerts })
+export const receiveAlerts = (alerts: IAlertsState) => ({ type: RECEIVED_ALERTS_DATA, payload: alerts })
 
 export const requestEvents = () => ({ type: REQUEST_EVENTS_DATA })
 export const requestEventsFailed = () => ({ type: REQUEST_EVENTS_DATA_FAILED })
@@ -100,7 +102,7 @@ export const receiveDeals = (deals: any) => ({ type: RECEIVED_DEALS_DATA, payloa
 
 export const requestFissures = () => ({ type: REQUEST_FISSURE_DATA })
 export const requestFissuresFailed = () => ({ type: REQUEST_FISSURE_DATA_FAILED })
-export const receiveFissures = (fissures: any) => ({ type: RECEIVED_FISSURE_DATA, payload: fissures })
+export const receiveFissures = (fissures: IFissuresState) => ({ type: RECEIVED_FISSURE_DATA, payload: fissures })
 
 export const requestSorties = () => ({ type: REQUEST_SORTIE_DATA })
 export const requesSortiesFailed = () => ({ type: REQUEST_SORTIE_DATA_FAILED })
@@ -108,4 +110,4 @@ export const receiveSorties = (sorties: any) => ({ type: RECEIVED_SORTIE_DATA, p
 
 export const requestInvasions = () => ({ type: REQUEST_INVASIONS_DATA })
 export const requesInvasionsFailed = () => ({ type: REQUEST_INVASIONS_DATA_FAILED })
-export const receiveInvasions = (invasions: any) => ({ type: RECEIVED_INVASIONS_DATA, payload: invasions })
+export const receiveInvasions = (invasions: IInvasionsState) => ({ type: RECEIVED_INVASIONS_DATA, payload: invasions })

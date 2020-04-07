@@ -23,11 +23,17 @@ export interface IFrames {
 }
 
 export interface INews {
+  message: string,
+  link: string,
+  imageLink: string
+}
+
+export interface INewsState {
   news: [],
   type: string,
   isLoading: boolean,
   payload?: any,
-  errorMessage: string,
+  errorMessage: string
 }
 
 export interface IMods {
@@ -71,6 +77,12 @@ export interface IVallisCycle {
 }
 
 export interface IAlerts {
+  node: string,
+  faction: string
+}
+
+
+export interface IAlertsState {
   alerts: [],
   type: string,
   isLoading: boolean,
@@ -95,6 +107,15 @@ export interface IDailyDeals {
 }
 
 export interface IFissures {
+  tier: string,
+  tierNum: number,
+  node: string,
+  missionType: string,
+  enemy: string,
+  eta: string
+}
+
+export interface IFissuresState {
   fissures: [],
   type: string,
   isLoading: boolean,
@@ -111,6 +132,12 @@ export interface ISorties {
 }
 
 export interface IInvasions {
+  node: string,
+  desc: string,
+  eta: string
+}
+
+export interface IInvasionsState {
   invasions: [],
   type: string,
   isLoading: boolean,
