@@ -271,9 +271,17 @@
     &:last-of-type {
       margin-top: 40px;
 
+      h5 {
+        text-align: center;
+        margin-bottom: 5px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
       @include desktop {
         margin-top: 0;
-        justify-content: center;
       }
 
       @include desktop-plus {

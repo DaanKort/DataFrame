@@ -77,8 +77,8 @@ export interface IVallisCycle {
 }
 
 export interface IAlerts {
-  node: string,
-  faction: string
+  eta: string,
+  mission: {}
 }
 
 
