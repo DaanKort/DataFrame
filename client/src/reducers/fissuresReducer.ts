@@ -1,6 +1,6 @@
-import { IFissures } from '../interfaces';
+import { IFissuresState } from '../interfaces';
 
-const defaultState: IFissures = {
+const defaultState: IFissuresState = {
   fissures: [],
   type: '',
   errorMessage: '',
@@ -11,7 +11,7 @@ export type FissureState = {}
 
 export const fissuresReducer = (
   state: FissureState = defaultState,
-  action: IFissures
+  action: IFissuresState
 ) => {
   switch (action.type) {
     case 'REQUEST_FISSURE_DATA':

@@ -1,6 +1,6 @@
-import { INews } from '../interfaces';
+import { INewsState } from './../interfaces/index';
 
-const defaultState: INews = {
+const defaultState: INewsState = {
   news: [],
   type: '',
   errorMessage: '',
@@ -11,7 +11,7 @@ export type NewsState = {}
 
 export const newsReducer =  (
     state: NewsState = defaultState,
-    action: INews
+    action: INewsState
 ) => {
     switch (action.type) {
       case 'REQUEST_NEWS_DATA':

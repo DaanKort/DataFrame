@@ -1,6 +1,6 @@
-import { IAlerts } from '../interfaces';
+import { IAlertsState } from '../interfaces';
 
-const defaultState: IAlerts = {
+const defaultState: IAlertsState = {
   alerts: [],
   type: '',
   errorMessage: '',
@@ -11,7 +11,7 @@ export type AlertsState = {}
 
 export const alertsReducer = (
   state: AlertsState = defaultState,
-  action: IAlerts
+  action: IAlertsState
 ) => {
   switch (action.type) {
     case 'REQUEST_ALERTS_DATA':
