@@ -29,6 +29,8 @@ export default function Home() {
   let fissureData = fissures.fissures;
   let invasionsData = invasions.invasions;
 
+  console.log(alertsData);
+
   (() => {
     for (let i = invasionsData.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -45,6 +47,14 @@ export default function Home() {
     return fissureData;
   })();
 
+  (() => {
+    for (let i = alertsData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [alertsData[i], alertsData[j]] = [alertsData[j], alertsData[i]];
+    }
+    return alertsData;
+  })();
+
   const gliderSettings = {
     dots: true,
     arrows: false,
@@ -54,6 +64,21 @@ export default function Home() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1
+  }
+
+  interface alertsMission extends IAlerts {
+    eta: string,
+    mission: {
+      node: string,
+      faction: string,
+      description: string,
+      type: string,
+      minEnemyLevel: number,
+      maxEnemyLevel: number
+      reward: {
+        itemString: string
+      }
+    }
   }
 
   return (
@@ -121,6 +146,7 @@ export default function Home() {
             </div>
           </div>
         </Glider>
+
         <div className='home-duo home--spacing boxed'>
           <div className='home-side'>
             <h4 className='home-side__title'>Latest News:</h4>
@@ -134,16 +160,20 @@ export default function Home() {
             }
           </div>
           <div className='home-side'>
+            <h4 className='home-side__title'>Alert:</h4>
             {alertsData.length === 0 ? (
               <div className='home-side__empty'>
                 <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
                 <h4>There are no alerts at the moment!</h4>
               </div>
             ) : (
-              alertsData.map((alert:IAlerts, index:number) => (
+              alertsData.slice(0, 1).map((alert:alertsMission, index:number) => (
                 <div className='home-side__data' key={index}>
-                  <h4>{alert.node}</h4>
-                  <h5>{alert.faction}</h5>
+                  <h5>{alert.mission.description}</h5>
+                  <h5>{alert.mission.reward.itemString}</h5>
+                  <h5>{alert.mission.node} - {alert.mission.faction}</h5>
+                  <h5>{alert.mission.type}</h5>
+                  <h5>level {alert.mission.minEnemyLevel} - {alert.mission.maxEnemyLevel}</h5>
                 </div>
               ))
             )}
