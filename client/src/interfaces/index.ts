@@ -117,3 +117,8 @@ export interface IInvasions {
   payload?: any,
   errorMessage: string
 }
+
+export interface etaDate {
+  index: number,
+  etaIntegers: number[]
+}
