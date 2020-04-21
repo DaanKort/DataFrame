@@ -15,19 +15,20 @@ export async function Login(user: IUser) {
   return await fetch("http://localhost:8080/api/user", {
     method: "POST",
     headers: {
-      "content-type": "application/json"
+      "content-type": "application/json",
+      mode: "no-cors",
     },
     body: JSON.stringify({
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       password: user.password
-    })
+    }),
   })
-    .then(function(response) {
+    .then(function (response) {
       return response.json();
     })
-    .then(function(data) {
+    .then(function (data) {
       return JSON.stringify(data);
     });
 }

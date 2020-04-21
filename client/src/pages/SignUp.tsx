@@ -5,41 +5,60 @@ import { requestLogin } from "../actions/actions";
 
 export default function SignUp() {
   const dispatch = useDispatch();
-  const user = useSelector<IUser, any>(state => ({
-    isAuthenticated: state.isAuthenticated,
-    firstName: state.firstName,
-    lastName: state.lastName,
-    email: state.email,
-    password: state.password
-  }));
-  const error = useSelector<IError, any>(state => ({
-    status: state.status,
-    message: state.message,
-    id: state.id
-  }));
 
-  const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    token: null
+  const [user, setUser] = useState({
+    firstName: '', 
+    lastName: '',
+    email: '',
+    password: '',
   });
 
-  const handleChange = (e: any) => {
-    setState(([e.target.name] = e.target.value));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({...user, [e.target.name]: e.target.value})
   };
 
   const handleSubmit = () => {
     dispatch(
       requestLogin({
-        firstName: state.firstName,
-        lastName: state.lastName,
-        email: state.email,
-        password: state.password
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        password: user.password
       })
     );
   };
 
-  return <div></div>;
+  return (
+    <>
+      <input
+        type="text"
+        name="firstName"
+        onChange={handleChange}
+        defaultValue=""
+        placeholder="First Name"
+      />
+      <input
+        type="text"
+        name="lastName"
+        onChange={handleChange}
+        defaultValue=""
+        placeholder="Last Name"
+      />
+      <input
+        type="email"
+        name="email"
+        onChange={handleChange}
+        defaultValue=""
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        name="password"
+        onChange={handleChange}
+        defaultValue=""
+        placeholder="Password"
+      />
+      <button onClick={() => handleSubmit()}>Register</button>
+    </>
+  );
 }

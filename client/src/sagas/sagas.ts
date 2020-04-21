@@ -177,14 +177,15 @@ function* fetchInvasions() {
 function* callRequestLogin(action: IAction) {
   let results = yield call(Login, action.payload);
   results = JSON.parse(results);
-  if (typeof results.token == typeof undefined) {
-    yield put(requestLoginFailed(results));
-  }
-  const token = results.token;
-  localStorage.setItem("jwtToken", token);
-  const Tokendecode = yield jwt.decode(token);
-  localStorage.setItem("User", Tokendecode);
-  yield put(receiveLogin(Tokendecode));
+  console.log( results);
+  // if (typeof results.token == typeof undefined) {
+  //   yield put(requestLoginFailed(results));
+  // }
+  // const token = results.token;
+  // localStorage.setItem("jwtToken", token);
+  // const Tokendecode = yield jwt.decode(token);
+  // localStorage.setItem("User", Tokendecode);
+  yield put(receiveLogin(results));
 }
 
 export function* requestLoginSaga() {
