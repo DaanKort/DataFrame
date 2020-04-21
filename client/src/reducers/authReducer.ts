@@ -27,8 +27,8 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         isLoading: false,
         user: action.payload
       };
-    case "RECEIVE_REGISTER":
-      localStorage.setItem("token", action.payload.token);
+    case "REQUEST_REGISTER_SUCCESS":
+      window.location.href = '/';
       return {
         ...state,
         ...action.payload,
@@ -39,7 +39,6 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
     case "LOGIN_FAIL":
     case "LOGOUT_SUCCESS":
     case "REQUEST_REGISTER_FAILED":
-      localStorage.removeItem("token");
       return {
         ...state,
         token: null,

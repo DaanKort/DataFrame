@@ -11,7 +11,7 @@ export const api = async (endpoint: string): Promise<any> => {
   }
 };
 
-export async function Login(user: IUser) {
+export async function Register(user: IUser) {
   return await fetch("http://localhost:8080/api/user", {
     method: "POST",
     headers: {

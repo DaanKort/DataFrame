@@ -31,10 +31,13 @@ import {
   REQUEST_LOGIN,
   receiveLogin,
   authError,
-  requestLoginFailed
+  requestLoginFailed,
+  REQUEST_REGISTER,
+  receiveRegisterFailed,
+  receiveRegister
 } from "../actions/actions";
 
-import { api, Login } from "../api/api";
+import { api, Register } from "../api/api";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -174,22 +177,22 @@ function* fetchInvasions() {
   }
 }
 
-function* callRequestLogin(action: IAction) {
-  let results = yield call(Login, action.payload);
+function* callRequestRegister(action: IAction) {
+  let results = yield call(Register, action.payload);
   results = JSON.parse(results);
-  console.log( results);
-  // if (typeof results.token == typeof undefined) {
-  //   yield put(requestLoginFailed(results));
-  // }
-  // const token = results.token;
-  // localStorage.setItem("jwtToken", token);
-  // const Tokendecode = yield jwt.decode(token);
-  // localStorage.setItem("User", Tokendecode);
-  yield put(receiveLogin(results));
+  if (typeof results.token == typeof undefined) {
+    yield put(receiveRegisterFailed(results));
+  }
+  const token = results.token;
+  localStorage.setItem("x-auth-token", token);
+  const Tokendecode = yield jwt.decode(token);
+  console.log(Tokendecode.user.email);
+  localStorage.setItem('User', Tokendecode.user.email)
+  yield put(receiveRegister(Tokendecode));
 }
 
-export function* requestLoginSaga() {
-  yield takeEvery(REQUEST_LOGIN, callRequestLogin);
+export function* requestRegisterSaga() {
+  yield takeEvery(REQUEST_REGISTER, callRequestRegister);
 }
 
 export default function* mySaga() {
@@ -207,5 +210,5 @@ export default function* mySaga() {
   yield takeLatest(REQUEST_FISSURE_DATA, fetchFissures);
   yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
   yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
-  yield takeLatest(REQUEST_LOGIN, callRequestLogin);
+  yield takeLatest(REQUEST_REGISTER, callRequestRegister);
 }

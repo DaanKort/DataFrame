@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IError, IUser } from "../interfaces";
-import { requestLogin } from "../actions/actions";
+import { requestRegister } from "../actions/actions";
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function SignUp() {
 
   const handleSubmit = () => {
     dispatch(
-      requestLogin({
+      requestRegister({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
