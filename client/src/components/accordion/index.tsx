@@ -4,7 +4,7 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface IAccrodrionProps {
   accordionClass?: string;
-  accordionTitle: string;
+  accordionTitle: string | boolean;
   children: any
 }
 

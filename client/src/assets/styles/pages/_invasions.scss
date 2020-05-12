@@ -1,31 +1,72 @@
 .invasions {
   padding-top: 40px;
   padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
 
   &__title {
-    margin-bottom: 40px;
     text-align: center;
   }
 
-  &-container {
-    display: flex;
-    flex-direction: column;
-  }
+  &-rewards {
+    @include gradient-background(to right, $gold, $white, $secondary);
 
-  &-data {
-    margin-bottom: 40px;
+    padding-top: 5px;
+    margin-top: 20px;
 
-    &__info {
-      display: flex;
-      justify-content: space-between;
+    &-inner {
+      background-color: $dark-grey;
+      padding: 40px 20px 20px;
 
-      h5 {
+      h4 {
         text-align: center;
       }
     }
+  }
 
-    &:last-of-type {
-      margin-bottom: 0;
+  &-container {
+    margin-top: 40px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    grid-gap: 40px;
+
+    &-data {
+      margin: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  &-images {
+    display: flex;
+    flex-direction: column;
+
+    @include desktop {
+      flex-direction: row;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+
+      @include desktop {
+        margin-top: 0;
+
+        &:nth-of-type(2) {
+          margin: 0 40px;
+        }
+      }
+    }
+
+    &__image {
+      max-width: 250px;
     }
   }
 }
