@@ -173,6 +173,7 @@
       margin-top: 8px;
     }
 
+
     @include desktop {
       display: none;
       margin: 0;
@@ -180,6 +181,11 @@
       &--brand {
         font-size: 20px;
         line-height: 24px;
+      }
+
+      &--email {
+        font-size: 12px;
+        margin-left: 20px;;
       }
 
       &--open {

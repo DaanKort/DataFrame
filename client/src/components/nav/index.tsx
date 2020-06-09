@@ -10,6 +10,8 @@ interface IState {
   navMenu: boolean;
 }
 
+const userEmail = localStorage.getItem('User');
+
 export default function Nav() {
   const [navMenu, setNavMenu] = useState<IState | boolean>(false);
 
@@ -71,6 +73,7 @@ export default function Nav() {
             <img className='nav__logo' src={Brand} alt='brand' />
             <h5 className='nav__text nav__text--brand'>DataFrame</h5>
           </Link>
+          <p className='nav__text nav__text--email'>{userEmail}</p>
           <ul className={!navMenu ? 'nav-list' : 'nav-list nav-list--open'}>
             <Link to='/news' className='nav__link'>
               <li className='nav__item'>

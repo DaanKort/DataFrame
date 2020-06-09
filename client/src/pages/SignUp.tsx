@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { IError, IUser } from "../interfaces";
-import { requestRegister } from "../actions/actions";
+import { useDispatch } from "react-redux";
+import { requestRegister, requestLogin } from "../actions/actions";
+import Button from "../components/button/index";
+import Input from "../components/input/index"
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function SignUp() {
     setUser({...user, [e.target.name]: e.target.value})
   };
 
-  const handleSubmit = () => {
+  const handleSignUp = () => {
     dispatch(
       requestRegister({
         firstName: user.firstName,
@@ -28,37 +29,78 @@ export default function SignUp() {
     );
   };
 
+  const handleLogin = () => {
+    dispatch(
+      requestLogin({
+        email: user.email,
+        password: user.password
+      })
+    )
+  }
+
   return (
     <>
-      <input
-        type="text"
-        name="firstName"
-        onChange={handleChange}
-        defaultValue=""
-        placeholder="First Name"
-      />
-      <input
-        type="text"
-        name="lastName"
-        onChange={handleChange}
-        defaultValue=""
-        placeholder="Last Name"
-      />
-      <input
-        type="email"
-        name="email"
-        onChange={handleChange}
-        defaultValue=""
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        name="password"
-        onChange={handleChange}
-        defaultValue=""
-        placeholder="Password"
-      />
-      <button onClick={() => handleSubmit()}>Register</button>
+     
+     <div className="form-container">
+        <div className='form'>
+          <h2 className='news__title'>Login</h2>
+          <Input 
+            type="email" 
+            name="email" 
+            inputPlaceholder='Email' 
+            inputWrapperClass='signup-input'
+            onInputChange={handleChange}
+          />
+          <Input 
+            type="password" 
+            name="password" 
+            inputPlaceholder='Password' 
+            inputWrapperClass='signup-input'
+            onInputChange={handleChange}
+          />
+          <Button
+            buttonText="Login"
+            buttonClass="button button-primary"
+            onClick={() => handleLogin()}
+          />
+        </div>
+        <div className='form'>
+          <h2 className='news__title'>Sign Up</h2>
+          <Input 
+            type="text" 
+            name="firstName" 
+            inputPlaceholder='First Name' 
+            inputWrapperClass='signup-input'
+            onInputChange={handleChange}
+          />
+          <Input 
+            type="text" 
+            name="lastName" 
+            inputPlaceholder='Last Name' 
+            inputWrapperClass='signup-input'
+            onInputChange={handleChange}
+          />
+          <Input 
+            type="email" 
+            name="email" 
+            inputPlaceholder='Email' 
+            inputWrapperClass='signup-input'
+            onInputChange={handleChange}
+          />
+          <Input 
+            type="password" 
+            name="password" 
+            inputPlaceholder='Password' 
+            inputWrapperClass='signup-input'
+            onInputChange={handleChange}
+          />
+          <Button
+            buttonText="Register"
+            buttonClass="button button-primary"
+            onClick={() => handleSignUp()}
+          />
+        </div>
+     </div>
     </>
   );
 }

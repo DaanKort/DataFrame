@@ -1,4 +1,4 @@
-import { put, takeLatest, call, takeEvery } from "redux-saga/effects";
+import { put, takeLatest, call } from "redux-saga/effects";
 import {
   REQUEST_WEAPON_DATA,
   receiveWeaponData,
@@ -29,18 +29,15 @@ import {
   REQUEST_INVASIONS_DATA,
   receiveInvasions,
   REQUEST_LOGIN,
-  receiveLogin,
-  authError,
   requestLoginFailed,
   REQUEST_REGISTER,
   receiveRegisterFailed,
-  receiveRegister
+  receiveRegister,
+  receiveLogin
 } from "../actions/actions";
 
-import { api, Register } from "../api/api";
+import { api, Register, Login } from "../api/api";
 import jwt from "jsonwebtoken";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 import { IAction } from "../interfaces";
 
 function* fetchFrames() {
@@ -186,14 +183,24 @@ function* callRequestRegister(action: IAction) {
   const token = results.token;
   localStorage.setItem("x-auth-token", token);
   const Tokendecode = yield jwt.decode(token);
-  console.log(Tokendecode.user.email);
   localStorage.setItem('User', Tokendecode.user.email)
   yield put(receiveRegister(Tokendecode));
 }
 
-export function* requestRegisterSaga() {
-  yield takeEvery(REQUEST_REGISTER, callRequestRegister);
+function* callRequestLogin(action: IAction) {
+  let results = yield call(Login, action.payload);
+  results = JSON.parse(results);
+  if (typeof results.token == typeof undefined) {
+    yield put(requestLoginFailed(results));
+  }
+  const token = results.token;
+  console.log(results);
+  localStorage.setItem("x-auth-token", token);
+  const Tokendecode = yield jwt.decode(token);
+  localStorage.setItem('User', Tokendecode.user.email)
+  yield put(receiveLogin(Tokendecode));
 }
+
 
 export default function* mySaga() {
   yield takeLatest(REQUEST_WEAPON_DATA, fetchWeapons);
@@ -211,4 +218,5 @@ export default function* mySaga() {
   yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
   yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
   yield takeLatest(REQUEST_REGISTER, callRequestRegister);
+  yield takeLatest(REQUEST_LOGIN, callRequestLogin);
 }

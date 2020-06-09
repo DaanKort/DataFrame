@@ -54,7 +54,7 @@ router.post("/", (req: express.Request, res: express.Response) => {
                   name: user.name,
                   email: user.email
                 },
-                message: "Signed in!"
+                message: "Signed up!"
               });
             }
           );

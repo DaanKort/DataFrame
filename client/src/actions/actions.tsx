@@ -1,4 +1,5 @@
 import { createAction } from "redux-actions";
+import { IEvents } from "../interfaces";
 
 export const REQUEST_FRAME_DATA = "REQUEST_FRAME_DATA";
 export const REQUEST_FRAME_DATA_FAILED = "REQUEST_FRAME_DATA_FAILED";
@@ -148,7 +149,7 @@ export const receiveAlerts = (alerts: any) => ({
 
 export const requestEvents = () => ({ type: REQUEST_EVENTS_DATA });
 export const requestEventsFailed = () => ({ type: REQUEST_EVENTS_DATA_FAILED });
-export const receiveEvents = (events: any) => ({
+export const receiveEvents = (events: IEvents) => ({
   type: RECEIVED_EVENTS_DATA,
   payload: events
 });

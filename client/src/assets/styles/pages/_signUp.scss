@@ -1,0 +1,19 @@
+.form-container {
+    display: flex;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px;
+    background-color: $primary;
+    padding: 30px;
+    width: 40%;
+}
+
+.signup-input {
+    max-width: unset;
+    margin: 10px;
+}

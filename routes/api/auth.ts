@@ -31,7 +31,11 @@ router.post(
           return res.status(400).json({ message: "Invalid credentials" });
 
         jwt.sign(
-          { id: user.id },
+          { user: {
+              id: user.id,
+              email: user.email
+            } 
+          },
           config.get("jwtSecret"),
           { expiresIn: 3600 },
           (err: any, token: any) => {
@@ -43,7 +47,7 @@ router.post(
                 name: user.name,
                 email: user.email
               },
-              message: "Signed up!"
+              message: "Signed in!"
             });
           }
         );

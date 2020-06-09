@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { requestLogin } from "../actions/actions";
-import { IUser, IError } from "../interfaces/index";
+import React from "react";
 import Glider from "../components/glider/index";
 import Button from "../components/button/index";
 
 export default function Home() {
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(requestLogin());
-  // }, [dispatch]);
-
   const gliderSettings = {
     dots: true,
     arrows: false,
@@ -130,7 +121,6 @@ export default function Home() {
             </div>
           </div>
         </Glider>
-        <div className="home-cards boxed"></div>
       </section>
     </>
   );
