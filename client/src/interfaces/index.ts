@@ -1,137 +1,81 @@
 import { REQUEST_LOGIN } from "../actions/actions";
 
-export interface IWeapons {
+interface Base {
+  type: string;
+  payload?: any;
+  isLoading: boolean;
+  loginErrorMessage?: string
+  signUpErrorMessage?: string
+  errorMessage?: string
+}
+export interface IWeapons extends Base {
   weapons: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IWorldData {
+export interface IWorldData extends Base {
   worldState: [];
-  type: string;
-  payload?: any;
-  errorMessage: string;
-  isLoading: boolean;
 }
 
-export interface IFrames {
+export interface IFrames extends Base {
   frames: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface INews {
+export interface INews extends Base {
   news: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IMods {
+export interface IMods extends Base {
   mods: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IArcanes {
+export interface IArcanes extends Base {
   arcanes: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IResources {
+export interface IResources extends Base {
   resources: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface ICetusCycle {
+export interface ICetusCycle extends Base {
   cetusCycle: {};
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IVallisCycle {
+export interface IVallisCycle extends Base {
   vallisCycle: {};
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IAlerts {
+export interface IAlerts extends Base {
   alerts: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IEvents {
+export interface IEvents extends Base {
   events: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IDailyDeals {
+export interface IDailyDeals extends Base {
   deals: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
-}
 
-export interface IFissures {
+}
+export interface IFissures extends Base {
   fissures: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface ISorties {
+export interface ISorties extends Base {
   sorties: {};
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
 
-export interface IInvasions {
+export interface IInvasions extends Base {
   invasions: [];
-  type: string;
-  isLoading: boolean;
-  payload?: any;
-  errorMessage: string;
 }
-
-export interface IUser {
+export interface IUser extends Base {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
   isAuthenticated: boolean;
-  payload?: any;
-  isLoading: false;
-  type: string;
   token: string | null;
+  loggedIn: boolean;
 }
-
 export interface IAction {
   type: typeof REQUEST_LOGIN,
   payload: IUser;

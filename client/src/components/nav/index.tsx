@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Brand from '../../assets/images/brand-white.png';
 import Button from '../button/index';
+import { logoutSuccess } from "../../actions/actions";
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { faNewspaper, faFistRaised, faDatabase, faSkullCrossbones, faMeteor, faCloud } from '@fortawesome/free-solid-svg-icons';
@@ -8,13 +10,14 @@ import { Link } from 'react-router-dom';
 
 interface IState {
   navMenu: boolean;
+  loggedIn: boolean;
 }
 
 const userEmail = localStorage.getItem('User');
 
 export default function Nav() {
+  const dispatch = useDispatch();
   const [navMenu, setNavMenu] = useState<IState | boolean>(false);
-
   const navToggle = () => {
     !navMenu ? setNavMenu(true) : setNavMenu(false);
   }
@@ -57,6 +60,11 @@ export default function Nav() {
         content.classList.remove('content--open');
       }
     });
+  }
+
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
   }
 
   return (
@@ -111,7 +119,9 @@ export default function Nav() {
                 <p className='nav__text'>Cycles</p>
               </li>
             </Link>
-            <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' />
+            {
+              !userEmail ? <Button buttonText='Login' buttonLink='/register' buttonClass='nav__button button-primary' /> : <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' onClick={() => handleLogout()} />
+            }
           </ul>
         </div>
       </nav>

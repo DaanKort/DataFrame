@@ -33,7 +33,8 @@ import {
   REQUEST_REGISTER,
   receiveRegisterFailed,
   receiveRegister,
-  receiveLogin
+  receiveLogin,
+  LOGOUT_SUCCESS
 } from "../actions/actions";
 
 import { api, Register, Login } from "../api/api";
@@ -188,17 +189,27 @@ function* callRequestRegister(action: IAction) {
 }
 
 function* callRequestLogin(action: IAction) {
-  let results = yield call(Login, action.payload);
-  results = JSON.parse(results);
-  if (typeof results.token == typeof undefined) {
-    yield put(requestLoginFailed(results));
+  try {
+    let results = yield call(Login, action.payload);
+    results = JSON.parse(results);
+    if (typeof results.token == typeof undefined) {
+      yield put(requestLoginFailed(results));
+    }
+    const token = results.token;
+    localStorage.setItem("x-auth-token", token);
+    const Tokendecode = yield jwt.decode(token);
+    localStorage.setItem('User', Tokendecode.user.email)
+    yield put(receiveLogin(Tokendecode));
+  } catch (e) {
+    return
   }
-  const token = results.token;
-  console.log(results);
-  localStorage.setItem("x-auth-token", token);
-  const Tokendecode = yield jwt.decode(token);
-  localStorage.setItem('User', Tokendecode.user.email)
-  yield put(receiveLogin(Tokendecode));
+
+}
+
+function* logout() {
+  localStorage.removeItem('x-auth.token');
+  localStorage.removeItem('User');
+  window.location.reload();
 }
 
 
@@ -219,4 +230,5 @@ export default function* mySaga() {
   yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
   yield takeLatest(REQUEST_REGISTER, callRequestRegister);
   yield takeLatest(REQUEST_LOGIN, callRequestLogin);
+  yield takeLatest(LOGOUT_SUCCESS, logout);
 }

@@ -197,6 +197,8 @@ export const requestRegister = createAction(REQUEST_REGISTER);
 export const receiveRegister = createAction(REQUEST_REGISTER_SUCCESS);
 export const receiveRegisterFailed = createAction(REQUEST_REGISTER_FAILED);
 
+export const logoutSuccess = createAction(LOGOUT_SUCCESS);
+
 export const authError = createAction(AUTH_ERROR);
 
 export const getErrors = createAction(GET_ERRORS);
