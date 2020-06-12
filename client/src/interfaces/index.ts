@@ -20,8 +20,11 @@ export interface IFrames extends Base {
   frames: [];
 }
 
-export interface INews extends Base {
+export interface INewsState extends Base {
   news: [];
+  imageLink: string,
+  message: string;
+  link: string;
 }
 
 export interface IMods extends Base {
@@ -44,8 +47,11 @@ export interface IVallisCycle extends Base {
   vallisCycle: {};
 }
 
-export interface IAlerts extends Base {
+export interface IAlertsState extends Base {
   alerts: [];
+  node: string;
+  faction: string;
+
 }
 
 export interface IEvents extends Base {
@@ -56,17 +62,24 @@ export interface IDailyDeals extends Base {
   deals: [];
 
 }
-export interface IFissures extends Base {
+export interface IFissuresState extends Base {
   fissures: [];
+  tier: string;
+  tierNum: string;
+  node: string;
+  missionType: string;
+  enemy: string;
+  fissureEnemy: string;
+  eta: string;
 }
 
 export interface ISorties extends Base {
   sorties: {};
 }
 
-export interface IInvasions extends Base {
-  invasions: [];
-}
+// export interface IInvasions extends Base {
+//   invasions: [];
+// }
 export interface IUser extends Base {
   email: string;
   password: string;
@@ -87,4 +100,17 @@ export interface IError {
   message: {};
   id: number | null;
   status: number | null;
+}
+export interface IInvasions {
+  node: string,
+  desc: string,
+  eta: string
+}
+
+export interface IInvasionsState {
+  invasions: [],
+  type: string,
+  isLoading: boolean,
+  payload?: any,
+  errorMessage: string
 }

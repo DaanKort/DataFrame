@@ -1,7 +1,10 @@
-import { INews } from '../interfaces';
+import { INewsState } from './../interfaces/index';
 
-const defaultState: INews = {
+const defaultState: INewsState = {
   news: [],
+  imageLink: '',
+  link: '',
+  message: '',
   type: '',
   errorMessage: '',
   isLoading: false
@@ -9,29 +12,29 @@ const defaultState: INews = {
 
 export type NewsState = {}
 
-export const newsReducer =  (
-    state: NewsState = defaultState,
-    action: INews
+export const newsReducer = (
+  state: NewsState = defaultState,
+  action: INewsState
 ) => {
-    switch (action.type) {
-      case 'REQUEST_NEWS_DATA':
-        return {
-          ...state,
-          isLoading: true
-        };
-      case 'RECEIVED_NEWS_DATA':
-        return {
-          ...state,
-          isLoading: false,
-          news: action.payload,
-        };
-      case 'REQUEST_NEWS_DATA_FAILED':
-        return {
-          ...state,
-          errorMessage: 'Gaat nie goed he'
-        };
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case 'REQUEST_NEWS_DATA':
+      return {
+        ...state,
+        isLoading: true
+      };
+    case 'RECEIVED_NEWS_DATA':
+      return {
+        ...state,
+        isLoading: false,
+        news: action.payload,
+      };
+    case 'REQUEST_NEWS_DATA_FAILED':
+      return {
+        ...state,
+        errorMessage: 'Gaat nie goed he'
+      };
+    default:
+      return state;
+  }
 }
 
