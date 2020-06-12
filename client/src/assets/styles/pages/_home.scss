@@ -8,6 +8,21 @@
   &-wrapper {
     display: flex;
     flex-direction: column;
+
+    .twitter {
+      display: flex;
+      flex-direction: column;
+
+        &-feed {
+           background-color: $dark-grey;
+          display: flex;
+          justify-content: center;
+          padding: 15px;
+        }
+        @include desktop {
+          width: 400px;
+        }
+    }
   }
 
   &__title {

@@ -25,6 +25,7 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         isLoading: true
       };
     case "REQUEST_LOGIN_SUCCESS":
+      window.location.href = '/'
       return {
         ...state,
         isAuthenticated: true,
@@ -33,6 +34,7 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         loggedIn: true
       };
     case "REQUEST_REGISTER_SUCCESS":
+      window.location.href = '/'
       return {
         ...state,
         ...action.payload,

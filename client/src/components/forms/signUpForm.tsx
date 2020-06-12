@@ -30,6 +30,7 @@ const SignUpForm: React.FC = () => {
                 password: user.password
             }),
         );
+        !signupError && console.log('redirected');
     };
     return (
         <div className='form'>

@@ -1,6 +1,7 @@
 import React from "react";
 import Glider from "../components/glider/index";
 import Button from "../components/button/index";
+import { Timeline } from 'react-twitter-widgets'
 
 export default function Home() {
   const gliderSettings = {
@@ -121,6 +122,21 @@ export default function Home() {
             </div>
           </div>
         </Glider>
+        <div className="twitter">
+          <div className="twitter-feed">
+            <p className='twitter-title'>Twitter Feed</p>
+          </div>
+          <Timeline
+            dataSource={{
+              sourceType: 'profile',
+              screenName: 'PlayWarframe'
+            }}
+            options={{
+              height: '300',
+            }}
+            renderError={(_err: string) => <p className='twitter-title'>Could not load feed</p>}
+          />
+        </div>
       </section>
     </>
   );
