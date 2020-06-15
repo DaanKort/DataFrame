@@ -25,26 +25,26 @@ export default function CardRegular(props: IRegularCardProps) {
 
   return (
     <>
-    <div className='card'>
-      <div className='card-inner'>
-        <div className='card-border'>
-          <h5 className='card__title'>{cardRegularTitle}</h5>
-          <FontAwesomeIcon icon={faArrowAltCircleRight} className={!cardMenu ? 'card-menu__icon' : 'card-menu__icon card-menu__icon--open'} onClick={toggleCardMenu} />
-        </div>
-        <div className='card-content'>
-          {children}
-        </div>
-        {cardRegularButtonText &&
+      <div className='card'>
+        <div className='card-inner'>
           <div className='card-border'>
-            <a className={`button ${cardRegularButtonClass}`} href={cardRegularButtonLink}>
-              <span />
-              <span />
-              <span />
-              <span />
-              {cardRegularButtonText}
-            </a>
+            <h5 className='card__title'>{cardRegularTitle}</h5>
+            <FontAwesomeIcon icon={faArrowAltCircleRight} className={!cardMenu ? 'card-menu__icon' : 'card-menu__icon card-menu__icon--open'} onClick={toggleCardMenu} />
           </div>
-        }
+          <div className='card-content'>
+            {children}
+          </div>
+          {cardRegularButtonText &&
+            <div className='card-border'>
+              <a className={`button ${cardRegularButtonClass}`} href={cardRegularButtonLink}>
+                <span />
+                <span />
+                <span />
+                <span />
+                {cardRegularButtonText}
+              </a>
+            </div>
+          }
         </div>
         <div className={!cardMenu ? 'card-menu' : 'card-menu card-menu--open'}>
           <div className='card-menu__inner'>

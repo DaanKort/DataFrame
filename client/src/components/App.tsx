@@ -11,6 +11,8 @@ import Sorties from '../pages/Sorties';
 import News from '../pages/News';
 import Fissures from '../pages/Fissures';
 import Items from '../pages/Items';
+import Frames from '../pages/Frames';
+import FramesDetail from '../pages/FramesDetail';
 
 export default () => (
   <Provider store={store}>
@@ -18,12 +20,14 @@ export default () => (
       <Nav />
       <section className="content">
         <Route exact path='/' component={Home} />
-        <Route path='/news' component={News} />
-        <Route path='/cycles' component={Cycles} />
-        <Route path='/fissures' component={Fissures} />
-        <Route path='/invasions' component={Invasions} />
-        <Route path='/sorties' component={Sorties} />
-        <Route path='/items' component={Items} />
+        <Route exact path='/news' component={News} />
+        <Route exact path='/cycles' component={Cycles} />
+        <Route exact path='/fissures' component={Fissures} />
+        <Route exact path='/invasions' component={Invasions} />
+        <Route exact path='/sorties' component={Sorties} />
+        <Route exact path='/items' component={Items} />
+        <Route exact path='/frames' component={Frames} />
+        <Route exact path='/frame/:name' component={FramesDetail} />
       </section>
     </Router>
   </Provider>

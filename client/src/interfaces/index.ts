@@ -15,11 +15,16 @@ export interface IWorldData {
 }
 
 export interface IFrames {
-  frames: [],
+  frames: []
   type: string,
   isLoading: boolean,
   payload?: any,
   errorMessage: string,
+}
+export interface IFramesProps {
+  name: string;
+  wikiaThumbnail: string;
+  id: number;
 }
 
 export interface INews {

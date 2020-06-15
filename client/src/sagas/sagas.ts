@@ -32,7 +32,7 @@ import {
 
 import { api } from '../api/api'
 
-function* fetchFrames () {
+function* fetchFrames() {
   try {
     const dataObj = yield call(api, 'warframes');
     yield put(receiveFrameData(dataObj));
