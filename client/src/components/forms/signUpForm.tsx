@@ -4,10 +4,17 @@ import Button from "../button/index";
 import Input from "../input/index"
 import { requestRegister } from "../../actions/actions";
 
+interface ISignUp {
+    auth: {
+        signUpErrorMessage: string;
+    }
+    message: string;
+}
+
 
 const SignUpForm: React.FC = () => {
-    const signupError: any = useSelector<any>(state => state.auth.signUpErrorMessage);
-    const signupErrorMsg = signupError.message;
+    const signupError: ISignUp = useSelector<ISignUp>(state => state.auth.signUpErrorMessage) as ISignUp;
+    const signupErrorMsg: string = signupError.message;
     const dispatch = useDispatch();
 
     const [user, setUser] = useState({
