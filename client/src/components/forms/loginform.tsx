@@ -4,9 +4,16 @@ import Button from "../button/index";
 import Input from "../input/index"
 import { requestLogin } from "../../actions/actions";
 
+interface ILogin {
+    auth: {
+        loginErrorMessage: string
+    }
+    message: string
+}
+
 const Loginform: React.FC = () => {
-    const loginError: any = useSelector<any>(state => state.auth.loginErrorMessage);
-    const loginErrorMsg = loginError.message;
+    const loginError: ILogin = useSelector<any>(state => state.auth.loginErrorMessage) as ILogin;
+    const loginErrorMsg: string = loginError.message;
     const dispatch = useDispatch();
 
     const [user, setUser] = useState({
