@@ -51,6 +51,12 @@ export interface IAlertsState extends Base {
   alerts: [];
   node: string;
   faction: string;
+  tag: string;
+  mission: {
+    node: string;
+    faction: string;
+    description: string;
+  };
 
 }
 

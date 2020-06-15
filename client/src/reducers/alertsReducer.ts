@@ -6,7 +6,13 @@ const defaultState: IAlertsState = {
   errorMessage: '',
   isLoading: false,
   node: '',
-  faction: ''
+  faction: '',
+  tag: '',
+  mission: {
+    node: '',
+    faction: '',
+    description: '',
+  }
 }
 
 export type AlertsState = {}

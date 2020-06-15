@@ -164,47 +164,57 @@ export default function Home() {
             </div>
           </div>
         </Glider>
-        <div className="twitter">
-          <div className="twitter-feed">
-            <h3 className='twitter-title'>Twitter Feed</h3>
-          </div>
-          <Timeline
-            dataSource={{
-              sourceType: 'profile',
-              screenName: 'PlayWarframe'
-            }}
-            options={{
-              height: '300',
-            }}
-            renderError={(_err: string) => <p className='twitter-title'>Could not load feed</p>}
-          />
-        </div>
         <div className='home-duo home--spacing boxed'>
           <div className='home-side'>
-            <h4 className='home-side__title'>Latest News:</h4>
-            {
-              newsData.reverse().slice(0, 1).map((news: INewsState, index: number) => (
-                <div className='home-side__container' key={index}>
-                  <img src={news.imageLink} className='home-side__image' alt='asset' />
-                  <h5 className='home-side__title'>{news.message}</h5>
-                </div>
-              ))
-            }
-          </div>
-          <div className='home-side'>
-            {alertsData.length === 0 ? (
-              <div className='home-side__empty'>
-                <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
-                <h4>There are no alerts at the moment!</h4>
-              </div>
-            ) : (
-                alertsData.map((alert: IAlertsState, index: number) => (
-                  <div className='home-side__data' key={index}>
-                    <h4>{alert.node}</h4>
-                    <h5>{alert.faction}</h5>
+            <div className='home-side'>
+              <h4 className='home-side__title'>Latest News:</h4>
+              {
+                newsData.reverse().slice(0, 1).map((news: INewsState, index: number) => (
+                  <div className='home-side__container' key={index}>
+                    <img src={news.imageLink} className='home-side__image' alt='asset' />
+                    <h5 className='home-side__title'>{news.message}</h5>
                   </div>
                 ))
-              )}
+              }
+            </div>
+            <div className="duo-wrapper">
+              {alertsData.length === 0 ? (
+                <div className='home-side__empty'>
+                  <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
+                  <h4>There are no alerts at the moment!</h4>
+                </div>
+              ) : (
+                  alertsData.map((alert: IAlertsState, index: number) => (
+                    <div className='home-side__data' key={index}>
+                      <h4>Alerts: </h4>
+                      <h4>{alert.mission.description}</h4>
+                      <h4>{alert.mission.node}</h4>
+                      <h5>{alert.mission.faction}</h5>
+                      <Button
+                        buttonText="Details"
+                        buttonLink="/alert"
+                        buttonClass="button button-gold"
+                      />
+                    </div>
+                  ), console.log(alertsData))
+                )}
+            </div>
+          </div>
+          <div className="twitter">
+            <div className="twitter-feed">
+              <h3 className='twitter-title'>Twitter Feed</h3>
+            </div>
+            <Timeline
+              dataSource={{
+                sourceType: 'profile',
+                screenName: 'PlayWarframe'
+              }}
+              options={{
+                width: '400',
+                height: '600'
+              }}
+              renderError={(_err: string) => <p className='twitter-title'>Could not load feed</p>}
+            />
           </div>
         </div>
 
