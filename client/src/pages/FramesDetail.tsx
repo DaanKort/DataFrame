@@ -2,6 +2,7 @@ import React from 'react'
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IFrames, IFramesProps } from '../interfaces';
+import Loader from '../components/loader'
 
 interface MatchParams {
   name: string;
@@ -14,7 +15,6 @@ const FramesDetail: React.FC<Props> = ({ match }) => {
     params: { name },
   } = match;
 
-  console.log(framesData.frames);
 
   interface IAbility {
     name: string;
@@ -25,7 +25,7 @@ const FramesDetail: React.FC<Props> = ({ match }) => {
     <>
       <Link className='frames-button-back' to='/frames'>Back</Link>
       {
-        framesData.frames.map((frame: IFramesProps, index: number) => (
+        framesData.frames ? framesData.frames.map((frame: IFramesProps, index: number) => (
           frame.name === name &&
           <div className="frame" key={index}>
             <div className='frame-init'>
@@ -51,7 +51,9 @@ const FramesDetail: React.FC<Props> = ({ match }) => {
               ))}
             </div>
           </div>
-        ))
+        )) : <div className='loading-wrapper'>
+            <Loader />
+          </div>
       }
     </>
   )

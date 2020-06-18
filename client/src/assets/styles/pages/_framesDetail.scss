@@ -34,6 +34,7 @@
 
     &-img {
         padding: 50px;
+        max-width: 450px;
     }
 
     &-info {
@@ -55,4 +56,10 @@
     .regular {
         color: $white;
     }
+}
+
+.loading-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -23,7 +23,6 @@ import { api } from '../api/api'
 function* fetchFrames() {
   try {
     const dataObj = yield call(api, 'warframes');
-    console.log('1');
     yield put(receiveFrameData(dataObj));
   } catch (e) {
     console.log(e);

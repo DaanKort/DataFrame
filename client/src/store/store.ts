@@ -99,7 +99,11 @@ const store = createStore(pReducer,
   composeEnhancers(
     applyMiddleware(sagaMiddleware),
   ));
-const persistor = persistStore(store);
+const persistor = persistStore(
+  store,
+  null,
+  store.getState
+);
 export { persistor, store };
 
 sagaMiddleware.run(mySaga)
