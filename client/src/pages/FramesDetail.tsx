@@ -40,6 +40,8 @@ const FramesDetail: React.FC<Props> = ({ match }) => {
                 <p className='frame-stats__combat regular'><span className='gold'>Health:</span> {frame.health}</p>
                 <p className='frame-stats__combat regular'><span className='gold'>Shield:</span> {frame.shield}</p>
               </div>
+              <h4>Decription: </h4>
+              <p>{frame.description}</p>
               <h4>Abilities: </h4>
               {frame.abilities.map((ability: IAbility, index: number) => (
                 <div className="frame-ability-wrapper" key={index}>
@@ -47,8 +49,6 @@ const FramesDetail: React.FC<Props> = ({ match }) => {
                   <p>{ability.description}</p>
                 </div>
               ))}
-              <h4>Decription: </h4>
-              <p>{frame.description}</p>
             </div>
           </div>
         ))

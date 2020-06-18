@@ -157,9 +157,7 @@ function* fetchInvasions() {
 }
 
 export default function* mySaga() {
-  console.log('waiting for rehydratation');
   yield take(REHYDRATE);
-  console.log('Rehydrated');
   yield all([
     fork(fetchInvasions),
     fork(fetchWeapons),

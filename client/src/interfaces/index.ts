@@ -15,6 +15,7 @@ export interface IWorldData {
 }
 
 export interface IFrames {
+  [x: string]: any;
   frames: []
   type: string,
   isLoading: boolean,
