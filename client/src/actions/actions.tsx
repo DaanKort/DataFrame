@@ -57,11 +57,11 @@ export const REQUEST_INVASIONS_DATA_FAILED = 'REQUEST_INVASIONS_DATA_FAILED'
 export const RECEIVED_INVASIONS_DATA = 'RECEIVED_INVASIONS_DATA'
 
 export const requestFrameData = () => ({ type: REQUEST_FRAME_DATA })
-export const requestFrameDataFailed = () => ({ type: REQUEST_FRAME_DATA_FAILED})
+export const requestFrameDataFailed = () => ({ type: REQUEST_FRAME_DATA_FAILED })
 export const receiveFrameData = (frames: any) => ({ type: RECEIVED_FRAME_DATA, payload: frames })
 
 export const requestWeaponData = () => ({ type: REQUEST_WEAPON_DATA })
-export const requestWeaponDataFailed = () => ({ type: REQUEST_WEAPON_DATA_FAILED})
+export const requestWeaponDataFailed = () => ({ type: REQUEST_WEAPON_DATA_FAILED })
 export const receiveWeaponData = (weapons: any) => ({ type: RECEIVED_WEAPON_DATA, payload: weapons })
 
 export const requestNews = () => ({ type: REQUEST_NEWS_DATA })

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { frameReducer, FrameState } from './frameReducer';
-import { weaponReducer, WeaponState }  from './weaponReducer';
+import { weaponReducer, WeaponState } from './weaponReducer';
 import { newsReducer, NewsState } from './newsReducer';
 import { modsReducer, ModsState } from './modsReducer';
 import { arcaneReducer, ArcaneState } from './arcaneReducer';
@@ -31,7 +31,7 @@ export interface State {
   invasions: InvasionsState
 }
 
-export const rootReducer = combineReducers<State>({
+const rootReducer = combineReducers<State>({
   frames: frameReducer,
   weapons: weaponReducer,
   news: newsReducer,
@@ -48,3 +48,4 @@ export const rootReducer = combineReducers<State>({
   invasions: invasionsReducer
 });
 
+export default rootReducer;

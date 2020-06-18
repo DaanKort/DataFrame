@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faStar, faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
+import { Link } from 'react-router-dom';
 
 interface IRegularCardProps {
   cardRegularTitle: string,
   cardRegularButtonText?: string,
   cardRegularButtonLink?: string,
-  cardRegularButtonClass?: string,
+  cardRegularButtonClass?: string | undefined,
   children: any
 }
 
@@ -36,13 +37,13 @@ export default function CardRegular(props: IRegularCardProps) {
           </div>
           {cardRegularButtonText &&
             <div className='card-border'>
-              <a className={`button ${cardRegularButtonClass}`} href={cardRegularButtonLink}>
+              <Link className={`button ${cardRegularButtonClass}`} to={{ pathname: cardRegularButtonLink }}>
                 <span />
                 <span />
                 <span />
                 <span />
                 {cardRegularButtonText}
-              </a>
+              </Link>
             </div>
           }
         </div>

@@ -17,7 +17,7 @@ export const frameReducer = (
     case 'REQUEST_FRAME_DATA':
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case 'RECEIVED_FRAME_DATA':
       return {

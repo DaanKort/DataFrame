@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/styles/main.scss';
-import store from '../store/store';
+import { store } from '../store/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from './nav/index';

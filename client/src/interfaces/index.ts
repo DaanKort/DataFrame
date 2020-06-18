@@ -21,10 +21,15 @@ export interface IFrames {
   payload?: any,
   errorMessage: string,
 }
+
 export interface IFramesProps {
   name: string;
   wikiaThumbnail: string;
   id: number;
+  description: string;
+  health: number;
+  shield: number;
+  abilities: any
 }
 
 export interface INews {

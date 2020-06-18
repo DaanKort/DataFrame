@@ -1,40 +1,29 @@
-import { put, takeLatest, call } from 'redux-saga/effects'
+import { put, call, take, all, fork } from 'redux-saga/effects'
 import {
-  REQUEST_WEAPON_DATA,
   receiveWeaponData,
-  REQUEST_FRAME_DATA,
   receiveFrameData,
-  REQUEST_NEWS_DATA,
   receivedNews,
-  REQUEST_MOD_DATA,
   receivedMods,
-  REQUEST_ARCANE_DATA,
   receivedArcanes,
-  REQUEST_RESOURCE_DATA,
   receivedResources,
-  REQUEST_CETUS_CYCLE_DATA,
   receiveCetusCycle,
-  REQUEST_VALLIS_CYCLE_DATA,
   receiveVallisCycle,
-  REQUEST_ALERTS_DATA,
   receiveAlerts,
-  REQUEST_EVENTS_DATA,
   receiveEvents,
-  REQUEST_DEALS_DATA,
   receiveDeals,
-  REQUEST_FISSURE_DATA,
   receiveFissures,
-  REQUEST_SORTIE_DATA,
   receiveSorties,
-  REQUEST_INVASIONS_DATA,
   receiveInvasions
 } from '../actions/actions';
+import { REHYDRATE } from 'redux-persist/lib/constants'
+
 
 import { api } from '../api/api'
 
 function* fetchFrames() {
   try {
     const dataObj = yield call(api, 'warframes');
+    console.log('1');
     yield put(receiveFrameData(dataObj));
   } catch (e) {
     console.log(e);
@@ -168,18 +157,38 @@ function* fetchInvasions() {
 }
 
 export default function* mySaga() {
-  yield takeLatest(REQUEST_WEAPON_DATA, fetchWeapons);
-  yield takeLatest(REQUEST_FRAME_DATA, fetchFrames);
-  yield takeLatest(REQUEST_NEWS_DATA, fetchNews);
-  yield takeLatest(REQUEST_MOD_DATA, fetchMods);
-  yield takeLatest(REQUEST_ARCANE_DATA, fetchArcanes);
-  yield takeLatest(REQUEST_RESOURCE_DATA, fetchResources);
-  yield takeLatest(REQUEST_CETUS_CYCLE_DATA, fetchCetusCycle);
-  yield takeLatest(REQUEST_VALLIS_CYCLE_DATA, fetchVallisCycle);
-  yield takeLatest(REQUEST_ALERTS_DATA, fetchAlerts);
-  yield takeLatest(REQUEST_EVENTS_DATA, fetchEvents);
-  yield takeLatest(REQUEST_DEALS_DATA, fetchDeals);
-  yield takeLatest(REQUEST_FISSURE_DATA, fetchFissures);
-  yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
-  yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
+  console.log('waiting for rehydratation');
+  yield take(REHYDRATE);
+  console.log('Rehydrated');
+  yield all([
+    fork(fetchInvasions),
+    fork(fetchWeapons),
+    fork(fetchFrames),
+    fork(fetchNews),
+    fork(fetchMods),
+    fork(fetchArcanes),
+    fork(fetchResources),
+    fork(fetchCetusCycle),
+    fork(fetchVallisCycle),
+    fork(fetchAlerts),
+    fork(fetchEvents),
+    fork(fetchDeals),
+    fork(fetchFissures),
+    fork(fetchSorties),
+    fork(fetchInvasions),
+  ])
+  // yield takeLatest(REQUEST_WEAPON_DATA, fetchWeapons);
+  // yield takeLatest(REQUEST_FRAME_DATA, fetchFrames);
+  // yield takeLatest(REQUEST_NEWS_DATA, fetchNews);
+  // yield takeLatest(REQUEST_MOD_DATA, fetchMods);
+  // yield takeLatest(REQUEST_ARCANE_DATA, fetchArcanes);
+  // yield takeLatest(REQUEST_RESOURCE_DATA, fetchResources);
+  // yield takeLatest(REQUEST_CETUS_CYCLE_DATA, fetchCetusCycle);
+  // yield takeLatest(REQUEST_VALLIS_CYCLE_DATA, fetchVallisCycle);
+  // yield takeLatest(REQUEST_ALERTS_DATA, fetchAlerts);
+  // yield takeLatest(REQUEST_EVENTS_DATA, fetchEvents);
+  // yield takeLatest(REQUEST_DEALS_DATA, fetchDeals);
+  // yield takeLatest(REQUEST_FISSURE_DATA, fetchFissures);
+  // yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
+  // yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
 }

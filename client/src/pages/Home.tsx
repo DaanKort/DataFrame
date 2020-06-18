@@ -10,7 +10,7 @@ import Injector from '../assets/images/injector.png';
 import Fieldron from '../assets/images/fieldron.png';
 import Mutagen from '../assets/images/mutagen.png';
 
-export default function Home() {
+const Home: React.FC = () => {
   const news = useSelector<INewsState, any>(state => state.news)
   const alerts = useSelector<IAlertsState, any>(state => state.alerts)
   const fissures = useSelector<IFissuresState, any>(state => state.fissures)
@@ -24,26 +24,13 @@ export default function Home() {
     dispatch(requestInvasions());
   }, [dispatch]);
 
-  let newsData = news.news;
-  let alertsData = alerts.alerts;
-  let fissureData = fissures.fissures;
-  let invasionsData = invasions.invasions;
-
-  (() => {
-    for (let i = invasionsData.length - 1; i > 0; i--) {
+  const itemRandomizer = (array: []) => {
+    for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [invasionsData[i], invasionsData[j]] = [invasionsData[j], invasionsData[i]];
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return invasionsData;
-  })();
-
-  (() => {
-    for (let i = fissureData.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [fissureData[i], fissureData[j]] = [fissureData[j], fissureData[i]];
-    }
-    return fissureData;
-  })();
+    return array;
+  }
 
   const gliderSettings = {
     dots: true,
@@ -125,7 +112,7 @@ export default function Home() {
           <div className='home-side'>
             <h4 className='home-side__title'>Latest News:</h4>
             {
-              newsData.reverse().slice(0, 1).map((news:INews, index:number) => (
+              news.news.reverse().slice(0, 1).map((news: INews, index: number) => (
                 <div className='home-side__container' key={index}>
                   <img src={news.imageLink} className='home-side__image' alt='asset' />
                   <h5 className='home-side__title'>{news.message}</h5>
@@ -134,19 +121,19 @@ export default function Home() {
             }
           </div>
           <div className='home-side'>
-            {alertsData.length === 0 ? (
+            {alerts.alerts.length === 0 ? (
               <div className='home-side__empty'>
                 <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
                 <h4>There are no alerts at the moment!</h4>
               </div>
             ) : (
-              alertsData.map((alert:IAlerts, index:number) => (
-                <div className='home-side__data' key={index}>
-                  <h4>{alert.node}</h4>
-                  <h5>{alert.faction}</h5>
-                </div>
-              ))
-            )}
+                alerts.alerts.map((alert: IAlerts, index: number) => (
+                  <div className='home-side__data' key={index}>
+                    <h4>{alert.node}</h4>
+                    <h5>{alert.faction}</h5>
+                  </div>
+                ))
+              )}
           </div>
         </div>
 
@@ -156,7 +143,7 @@ export default function Home() {
             <div className='home-invasions__layout'>
               <div className='home-invasions__info'>
                 {
-                  invasionsData.slice(0, 4).map((invasion:IInvasions, index:number) => (
+                  itemRandomizer(invasions.invasions).slice(0, 4).map((invasion: IInvasions, index: number) => (
                     <div className='home-invasions__container' key={index}>
                       <h4 className='home-invasions__node'>{invasion.node}</h4>
                       <h5 className='home-invasions__desc'>{invasion.desc}</h5>
@@ -168,9 +155,9 @@ export default function Home() {
               <div className='home-invasions__collage'>
                 <div className='home-invasions__inner'>
                   <h4>Potential Rewards:</h4>
-                  <img src={Injector} className='home-invasions__image' alt='asset'/>
-                  <img src={Fieldron} className='home-invasions__image' alt='asset'/>
-                  <img src={Mutagen} className='home-invasions__image' alt='asset'/>
+                  <img src={Injector} className='home-invasions__image' alt='asset' />
+                  <img src={Fieldron} className='home-invasions__image' alt='asset' />
+                  <img src={Mutagen} className='home-invasions__image' alt='asset' />
                 </div>
               </div>
             </div>
@@ -186,7 +173,7 @@ export default function Home() {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
           <div className='home-fissures__layout'>
             {
-              fissureData.slice(0, 3).map((fissure:IFissures, index:number) => (
+              itemRandomizer(fissures.fissures).slice(0, 3).map((fissure: IFissures, index: number) => (
                 <div className='home-fissures__container' key={index}>
                   <div className='home-fissures__wrapper'>
                     <h5>{fissure.tier} T{fissure.tierNum}</h5>
@@ -204,3 +191,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home;
