@@ -52,7 +52,7 @@ const FramesDetail: React.FC<Props> = ({ match }) => {
             </div>
           </div>
         )) : <div className='loading-wrapper'>
-            <Loader />
+            <Loader loading={true} />
           </div>
       }
     </>

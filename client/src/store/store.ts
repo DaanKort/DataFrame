@@ -100,9 +100,7 @@ const store = createStore(pReducer,
     applyMiddleware(sagaMiddleware),
   ));
 const persistor = persistStore(
-  store,
-  null,
-  store.getState
+  store
 );
 export { persistor, store };
 

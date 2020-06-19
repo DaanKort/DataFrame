@@ -56,7 +56,7 @@ const Frames: React.FC = () => {
               </div>
             )) :
               <>
-                <Loader />
+                <Loader loading={true} />
               </>
         }
       </section>
