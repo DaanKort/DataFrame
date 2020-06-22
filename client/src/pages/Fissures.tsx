@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IFissures } from '../interfaces/index';
+import { IFissuresState } from '../interfaces/index';
 import { requestFissures } from '../actions/actions';
 
 export default function Fissures() {
-  const fissures = useSelector<IFissures, any>(state => state.fissures)
+  const fissures = useSelector<IFissuresState, any>(state => state.fissures)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Fissures() {
   return (
     <section className='fissures boxed'>
       {
-        fissuresData.sort().map((fissure: any, index: any) => (
+        fissuresData.sort().map((fissure: IFissuresState, index: any) => (
           <article className='fissures-container' key={index}>
             <div className='fissures-inner'>
               <p className='fissures__tier'>T{fissure.tierNum}</p>

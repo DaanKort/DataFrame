@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import Brand from '../../assets/images/brand-white.png';
 import Button from '../button/index';
+import { logoutSuccess } from "../../actions/actions";
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
-import { faNewspaper, faFistRaised, faDatabase, faSkullCrossbones, faMeteor, faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faNewspaper, faFistRaised, faDatabase, faSkullCrossbones, faMeteor, faCloud, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 interface IState {
   navMenu: boolean;
+  loggedIn: boolean;
 }
 
-export default function Nav() {
-  const [navMenu, setNavMenu] = useState<IState | boolean>(false);
+const userEmail = localStorage.getItem('User');
 
+export default function Nav() {
+  const dispatch = useDispatch();
+  const [navMenu, setNavMenu] = useState<IState | boolean>(false);
   const navToggle = () => {
     !navMenu ? setNavMenu(true) : setNavMenu(false);
   }
@@ -55,6 +60,12 @@ export default function Nav() {
         content.classList.remove('content--open');
       }
     });
+    navToggle();
+  }
+
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
   }
 
   return (
@@ -67,48 +78,59 @@ export default function Nav() {
             <span />
           </div>
           <FontAwesomeIcon icon={faArrowAltCircleRight} className='nav__arrow' onClick={navToggleDesktop} />
-          <Link to='/' className='nav__brand'>
+          <Link to='/' className='nav__brand' onClick={navMenu ? navToggle : () => { }}>
             <img className='nav__logo' src={Brand} alt='brand' />
             <h5 className='nav__text nav__text--brand'>DataFrame</h5>
           </Link>
+          <p className='nav__text nav__text--email'>{userEmail}</p>
           <ul className={!navMenu ? 'nav-list' : 'nav-list nav-list--open'}>
-            <Link to='/news' className='nav__link'>
+            <Link to='/news' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faNewspaper} className='nav__asset' />
                 <p className='nav__text'>News</p>
               </li>
             </Link>
-            <Link to='/invasions' className='nav__link'>
+            <Link to='/invasions' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faFistRaised} className='nav__asset' />
                 <p className='nav__text'>Invasions</p>
               </li>
             </Link>
-            <Link to='/items' className='nav__link'>
+            <Link to='/items' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faDatabase} className='nav__asset' />
                 <p className='nav__text'>Items</p>
               </li>
             </Link>
-            <Link to='/sorties' className='nav__link'>
+            <Link to='/sorties' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faSkullCrossbones} className='nav__asset' />
                 <p className='nav__text'>Sorties</p>
               </li>
             </Link>
-            <Link to='/fissures' className='nav__link'>
+            <Link to='/fissures' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faMeteor} className='nav__asset' />
                 <p className='nav__text'>Fissures</p>
               </li>
             </Link>
-            <Link to='/cycles' className='nav__link'>
+            <Link to='/cycles' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faCloud} className='nav__asset' />
                 <p className='nav__text'>Cycles</p>
               </li>
             </Link>
-            <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' />
+            {
+              !userEmail ? <Button buttonText='Login' buttonLink='/register' buttonClass='nav__button button-primary' /> : <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' onClick={() => handleLogout()} />
+            }
+
+            {
+              !navMenu && <Link to='/register' className='nav__link'>
+                <li className='nav__item'>
+                  <FontAwesomeIcon icon={faSignInAlt} className='nav__asset' />
+                </li>
+              </Link>
+            }
           </ul>
         </div>
       </nav>
