@@ -4,7 +4,7 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   buttonLink?: string,
   buttonText: string,
   buttonClass?: string
-  onClick? : () => void;
+  onClick?: () => void;
 }
 
 export default function Button(props: IButtonProps) {

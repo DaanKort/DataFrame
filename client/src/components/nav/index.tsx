@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { faNewspaper, faFistRaised, faDatabase, faSkullCrossbones, faMeteor, faCloud, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 interface IState {
   navMenu: boolean;
@@ -20,7 +21,9 @@ export default function Nav() {
   const [navMenu, setNavMenu] = useState<IState | boolean>(false);
   const navToggle = () => {
     !navMenu ? setNavMenu(true) : setNavMenu(false);
+    console.log('navMenu: ', navMenu);
   }
+  console.log('navMenu: ', navMenu);
 
   const navToggleDesktop = () => {
     const nav = document.querySelectorAll('.nav');
@@ -62,7 +65,7 @@ export default function Nav() {
     });
     navToggle();
   }
-
+  isMobile && console.log('Mobile');
 
   const handleLogout = () => {
     dispatch(logoutSuccess());
@@ -72,56 +75,58 @@ export default function Nav() {
     <>
       <nav className='nav'>
         <div className='nav-inner'>
-          <div className={!navMenu ? 'nav__icon' : 'nav__icon nav__icon--open'} onClick={navToggle}>
+          <div className={!navMenu ? 'nav__icon' : 'nav__icon nav__icon--open'} onClick={isMobile ? navToggle : () => { }}>
             <span />
             <span />
             <span />
           </div>
           <FontAwesomeIcon icon={faArrowAltCircleRight} className='nav__arrow' onClick={navToggleDesktop} />
-          <Link to='/' className='nav__brand' onClick={navMenu ? navToggle : () => { }}>
+          <Link to='/' className='nav__brand' onClick={isMobile && navMenu ? navToggle : () => { }}>
             <img className='nav__logo' src={Brand} alt='brand' />
             <h5 className='nav__text nav__text--brand'>DataFrame</h5>
           </Link>
           <p className='nav__text nav__text--email'>{userEmail}</p>
           <ul className={!navMenu ? 'nav-list' : 'nav-list nav-list--open'}>
-            <Link to='/news' className='nav__link' onClick={navToggle}>
+            <Link to='/news' className='nav__link' onClick={isMobile ? navToggle : () => { }}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faNewspaper} className='nav__asset' />
                 <p className='nav__text'>News</p>
               </li>
             </Link>
-            <Link to='/invasions' className='nav__link' onClick={navToggle}>
+            <Link to='/invasions' className='nav__link' onClick={isMobile ? navToggle : () => { }}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faFistRaised} className='nav__asset' />
                 <p className='nav__text'>Invasions</p>
               </li>
             </Link>
-            <Link to='/items' className='nav__link' onClick={navToggle}>
+            <Link to='/items' className='nav__link' onClick={isMobile ? navToggle : () => { }}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faDatabase} className='nav__asset' />
                 <p className='nav__text'>Items</p>
               </li>
             </Link>
-            <Link to='/sorties' className='nav__link' onClick={navToggle}>
+            <Link to='/sorties' className='nav__link' onClick={isMobile ? navToggle : () => { }}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faSkullCrossbones} className='nav__asset' />
                 <p className='nav__text'>Sorties</p>
               </li>
             </Link>
-            <Link to='/fissures' className='nav__link' onClick={navToggle}>
+            <Link to='/fissures' className='nav__link' onClick={isMobile ? navToggle : () => { }}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faMeteor} className='nav__asset' />
                 <p className='nav__text'>Fissures</p>
               </li>
             </Link>
-            <Link to='/cycles' className='nav__link' onClick={navToggle}>
+            <Link to='/cycles' className='nav__link' onClick={isMobile ? navToggle : () => { }}>
               <li className='nav__item'>
                 <FontAwesomeIcon icon={faCloud} className='nav__asset' />
                 <p className='nav__text'>Cycles</p>
               </li>
             </Link>
             {
-              !userEmail ? <Button buttonText='Login' buttonLink='/register' buttonClass='nav__button button-primary' /> : <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' onClick={() => handleLogout()} />
+              !userEmail ? <Button buttonText='Login' buttonLink='/register' buttonClass='nav__button button-primary' />
+                :
+                <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' onClick={() => handleLogout()} />
             }
 
             {
