@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IInvasions, etaDate } from '../interfaces/index';
+import { IInvasions, etaDate, IInvasionsState } from '../interfaces/index';
 import { requestInvasions } from '../actions/actions';
 import { calcDate } from '../utilities/calcDate';
 import { add } from 'date-fns';
@@ -16,7 +16,7 @@ interface CountDownDate {
 }
 
 export default function Invasions() {
-  const invasions = useSelector<IInvasions, any>(state => state.invasions)
+  const invasions = useSelector<IInvasionsState, any>(state => state.invasions)
   const dispatch = useDispatch();
   const [timeLeft, setTimeLeft] = useState<any[]>([]);
   const [countDownDates, setCountDownDates] = useState<Date[]>([]);
@@ -29,7 +29,7 @@ export default function Invasions() {
         return;
       }
       let dateArray: Date[] = [];
-      etaSplit().map((eta:etaDate) => {
+      etaSplit().map((eta: etaDate) => {
         dateArray.push(calcDate(eta.etaIntegers.reverse()))
       });
       const timeArray: any[] = dateArray.map((date: Date) => {
@@ -69,11 +69,11 @@ export default function Invasions() {
 
   const etaSplit = () => {
     let etas = new Array();
-    invasionsData.map((invasion:any, index:number) => {
+    invasionsData.map((invasion: any, index: number) => {
       if (invasion.eta.charAt(0) !== '-' && !isNaN(parseInt(invasion.eta))) {
         const etaSplit = invasion.eta.split(' ');
-        const etaIntegers = etaSplit.map((eta:any) => {
-          let etaInt = parseInt(eta.substring(0, eta.length -1));
+        const etaIntegers = etaSplit.map((eta: any) => {
+          let etaInt = parseInt(eta.substring(0, eta.length - 1));
           return etaInt;
         })
         let etaObj = {
@@ -95,10 +95,10 @@ export default function Invasions() {
     const [remainingDays, remainingHours, remainingMinutes, remainingSeconds]: number[] = remainingTimeArray;
     const date: Date = new Date()
     return add(date, {
-        days: remainingDays,
-        hours: remainingHours,
-        minutes: remainingMinutes,
-        seconds: remainingSeconds
+      days: remainingDays,
+      hours: remainingHours,
+      minutes: remainingMinutes,
+      seconds: remainingSeconds
     });
   };
 
