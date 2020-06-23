@@ -199,6 +199,7 @@ function* callRequestLogin(action: IAction) {
     localStorage.setItem("x-auth-token", token);
     const Tokendecode = yield jwt.decode(token);
     localStorage.setItem('User', Tokendecode.user.email);
+    localStorage.setItem('id', Tokendecode.user.id);
     yield put(receiveLogin(Tokendecode));
   } catch (e) {
     return
