@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, ReactNode } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { requestNews, requestAlerts, requestFissures, requestInvasions } from '../actions/actions'
 import { INewsState, IAlertsState, IInvasions, IInvasionsState, IFissuresState } from '../interfaces/index';
@@ -213,7 +213,7 @@ export default function Home() {
                 width: '400',
                 height: '600'
               }}
-              renderError={(_err: string) => <p className='twitter-title'>Could not load feed</p>}
+              renderError={(_err: ReactNode) => <p className='twitter-title'>Could not load feed</p>}
             />
           </div>
         </div>
