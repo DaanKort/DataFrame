@@ -27,7 +27,7 @@ const Frames: React.FC = () => {
 
   return (
     <>
-      <Input type='text' inputPlaceholder='Search...' inputClass='input--home input--frames' inputWrapperClass='frames-input' onInputChange={frameSearch} />
+      <Input type='text' inputPlaceholder='Search...' name='frame-input' inputClass='input--home input--frames' inputWrapperClass='frames-input' onInputChange={frameSearch} />
       <section className=' frames'>
         {
           filteredFrames.length !== 0 ? filteredFrames.map((frame: IFramesProps, index: number) => (
