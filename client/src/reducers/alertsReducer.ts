@@ -4,7 +4,15 @@ const defaultState: IAlertsState = {
   alerts: [],
   type: '',
   errorMessage: '',
-  isLoading: false
+  isLoading: false,
+  node: '',
+  faction: '',
+  tag: '',
+  mission: {
+    node: '',
+    faction: '',
+    description: '',
+  }
 }
 
 export type AlertsState = {}

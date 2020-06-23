@@ -2,6 +2,13 @@ import { IFissuresState } from '../interfaces';
 
 const defaultState: IFissuresState = {
   fissures: [],
+  tier: '',
+  tierNum: '',
+  enemy: '',
+  eta: '',
+  fissureEnemy: '',
+  node: '',
+  missionType: '',
   type: '',
   errorMessage: '',
   isLoading: false

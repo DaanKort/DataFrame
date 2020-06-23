@@ -1,4 +1,5 @@
 import { INewsState, IInvasionsState, IAlertsState, IFissuresState } from '../interfaces/index'
+import { createAction } from 'redux-actions';
 
 export const REQUEST_FRAME_DATA = 'REQUEST_FRAME_DATA'
 export const REQUEST_FRAME_DATA_FAILED = 'REQUEST_FRAME_DATA_FAILED'
@@ -56,6 +57,19 @@ export const REQUEST_INVASIONS_DATA = 'REQUEST_INVASIONS_DATA'
 export const REQUEST_INVASIONS_DATA_FAILED = 'REQUEST_INVASIONS_DATA_FAILED'
 export const RECEIVED_INVASIONS_DATA = 'RECEIVED_INVASIONS_DATA'
 
+export const REQUEST_LOGIN = "REQUEST_LOGIN";
+export const REQUEST_LOGIN_SUCCESS = "REQUEST_LOGIN_SUCCESS";
+export const REQUEST_LOGIN_FAILED = "REQUEST_LOGIN_FAILED";
+
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const REQUEST_REGISTER = "REQUEST_REGISTER";
+export const REQUEST_REGISTER_SUCCESS = "REQUEST_REGISTER_SUCCESS";
+export const REQUEST_REGISTER_FAILED = "REQUEST_REGISTER_FAILED";
+export const AUTH_ERROR = "AUTH_ERROR";
+
+export const GET_ERRORS = "GET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
 export const requestFrameData = () => ({ type: REQUEST_FRAME_DATA })
 export const requestFrameDataFailed = () => ({ type: REQUEST_FRAME_DATA_FAILED })
 export const receiveFrameData = (frames: any) => ({ type: RECEIVED_FRAME_DATA, payload: frames })
@@ -111,3 +125,19 @@ export const receiveSorties = (sorties: any) => ({ type: RECEIVED_SORTIE_DATA, p
 export const requestInvasions = () => ({ type: REQUEST_INVASIONS_DATA })
 export const requesInvasionsFailed = () => ({ type: REQUEST_INVASIONS_DATA_FAILED })
 export const receiveInvasions = (invasions: IInvasionsState) => ({ type: RECEIVED_INVASIONS_DATA, payload: invasions })
+
+export const requestLogin = createAction(REQUEST_LOGIN);
+export const receiveLogin = createAction(REQUEST_LOGIN_SUCCESS);
+
+export const requestLoginFailed = createAction(REQUEST_LOGIN_FAILED);
+
+export const requestRegister = createAction(REQUEST_REGISTER);
+export const receiveRegister = createAction(REQUEST_REGISTER_SUCCESS);
+export const receiveRegisterFailed = createAction(REQUEST_REGISTER_FAILED);
+
+export const logoutSuccess = createAction(LOGOUT_SUCCESS);
+
+export const authError = createAction(AUTH_ERROR);
+
+export const getErrors = createAction(GET_ERRORS);
+export const clearErrors = createAction(CLEAR_ERRORS);

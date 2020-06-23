@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { INews, INewsState } from '../interfaces/index';
+import { INewsState } from '../interfaces/index';
 import { requestNews } from '../actions/actions';
 
 export default function News() {
@@ -19,7 +19,7 @@ export default function News() {
       <h2 className='news__title'>News</h2>
       <div className='news'>
         {
-          newsData.reverse().map((news: INews, index: number) => (
+          newsData.reverse().map((news: INewsState, index: number) => (
             <div className='news-container' key={index}>
               <div className='news-title'>
                 <h4 className='news-title__text'>{news.message}</h4>

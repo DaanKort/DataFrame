@@ -1,34 +1,36 @@
-import { combineReducers } from 'redux';
-import { frameReducer, FrameState } from './frameReducer';
-import { weaponReducer, WeaponState } from './weaponReducer';
-import { newsReducer, NewsState } from './newsReducer';
-import { modsReducer, ModsState } from './modsReducer';
-import { arcaneReducer, ArcaneState } from './arcaneReducer';
-import { resourceReducer, ResourceState } from './resourceReducer';
-import { cetusCycleReducer, CetusCycleState } from './cetusCycleReducer';
-import { vallisCycleReducer, VallisCycleState } from './vallisCycleReducer';
-import { alertsReducer, AlertsState } from './alertsReducer';
-import { eventsReducer, EventsState } from './eventsReducer';
-import { dealsReducer, DealsState } from './dealsReducer';
-import { fissuresReducer, FissureState } from './fissuresReducer';
-import { sortieReducer, SortieState } from './sortiesReducer';
-import { invasionsReducer, InvasionsState } from './invasionsReducer';
+import { combineReducers } from "redux";
+import { frameReducer, FrameState } from "./frameReducer";
+import { weaponReducer, WeaponState } from "./weaponReducer";
+import { newsReducer, NewsState } from "./newsReducer";
+import { modsReducer, ModsState } from "./modsReducer";
+import { arcaneReducer, ArcaneState } from "./arcaneReducer";
+import { resourceReducer, ResourceState } from "./resourceReducer";
+import { cetusCycleReducer, CetusCycleState } from "./cetusCycleReducer";
+import { vallisCycleReducer, VallisCycleState } from "./vallisCycleReducer";
+import { alertsReducer, AlertsState } from "./alertsReducer";
+import { eventsReducer, EventsState } from "./eventsReducer";
+import { dealsReducer, DealsState } from "./dealsReducer";
+import { fissuresReducer, FissureState } from "./fissuresReducer";
+import { sortieReducer, SortieState } from "./sortiesReducer";
+import { invasionsReducer, InvasionsState } from "./invasionsReducer";
+import { authReducer, AuthState } from "./authReducer";
 
 export interface State {
-  news: NewsState
-  weapons: WeaponState
-  frames: FrameState
-  mods: ModsState
-  arcanes: ArcaneState
-  resources: ResourceState
-  cetusCycle: CetusCycleState
-  vallisCycle: VallisCycleState
-  alerts: AlertsState
-  events: EventsState
-  deals: DealsState
-  fissures: FissureState
-  sorties: SortieState
-  invasions: InvasionsState
+  news: NewsState;
+  weapons: WeaponState;
+  frames: FrameState;
+  mods: ModsState;
+  arcanes: ArcaneState;
+  resources: ResourceState;
+  cetusCycle: CetusCycleState;
+  vallisCycle: VallisCycleState;
+  alerts: AlertsState;
+  events: EventsState;
+  deals: DealsState;
+  fissures: FissureState;
+  sorties: SortieState;
+  invasions: InvasionsState;
+  auth: AuthState;
 }
 
 const rootReducer = combineReducers<State>({
@@ -45,7 +47,8 @@ const rootReducer = combineReducers<State>({
   deals: dealsReducer,
   fissures: fissuresReducer,
   sorties: sortieReducer,
-  invasions: invasionsReducer
+  invasions: invasionsReducer,
+  auth: authReducer
 });
 
 export default rootReducer;

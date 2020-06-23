@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, ReactNode } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { requestNews, requestAlerts, requestFissures, requestInvasions } from '../actions/actions'
-import { INews, INewsState, IAlerts, IAlertsState, IFissures, IInvasions, IInvasionsState, IFissuresState } from '../interfaces/index';
+import { INewsState, IAlertsState, IInvasions, IInvasionsState, IFissuresState } from '../interfaces/index';
 import Glider from '../components/glider/index';
 import Button from '../components/button/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import { faExclamationTriangle, faSlash } from '@fortawesome/free-solid-svg-icon
 import Injector from '../assets/images/injector.png';
 import Fieldron from '../assets/images/fieldron.png';
 import Mutagen from '../assets/images/mutagen.png';
+import { Timeline } from 'react-twitter-widgets'
 
 const Home: React.FC = () => {
   const news = useSelector<INewsState, any>(state => state.news)
@@ -41,70 +42,112 @@ const Home: React.FC = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1
-  }
+  };
 
   return (
     <>
-      <section className='home-wrapper'>
-        <Glider settings={gliderSettings} gliderClass='glider--home'>
-          <div className='glider-glide glide1'>
-            <span className='glider__overlay' />
-            <div className='glider-content'>
-              <h4 className='glider__title'>News</h4>
-              <p className='glider__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      <section className="home-wrapper">
+        <Glider settings={gliderSettings} gliderClass="glider--home">
+          <div className="glider-glide glide1">
+            <span className="glider__overlay" />
+            <div className="glider-content">
+              <h4 className="glider__title">News</h4>
+              <p className="glider__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
-              <Button buttonText='Visit' buttonLink='#' buttonClass='glider__button button-gold' />
+              <Button
+                buttonText="Visit"
+                buttonLink="#"
+                buttonClass="glider__button button-gold"
+              />
             </div>
           </div>
-          <div className='glider-glide glide2'>
-            <span className='glider__overlay' />
-            <div className='glider-content'>
-              <h4 className='glider__title'>Invasions</h4>
-              <p className='glider__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <div className="glider-glide glide2">
+            <span className="glider__overlay" />
+            <div className="glider-content">
+              <h4 className="glider__title">Invasions</h4>
+              <p className="glider__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
-              <Button buttonText='Visit' buttonLink='#' buttonClass='glider__button button-gold' />
+              <Button
+                buttonText="Visit"
+                buttonLink="#"
+                buttonClass="glider__button button-gold"
+              />
             </div>
           </div>
-          <div className='glider-glide glide3'>
-            <span className='glider__overlay' />
-            <div className='glider-content'>
-              <h4 className='glider__title'>Items</h4>
-              <p className='glider__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <div className="glider-glide glide3">
+            <span className="glider__overlay" />
+            <div className="glider-content">
+              <h4 className="glider__title">Items</h4>
+              <p className="glider__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
-              <Button buttonText='Visit' buttonLink='#' buttonClass='glider__button button-gold' />
+              <Button
+                buttonText="Visit"
+                buttonLink="#"
+                buttonClass="glider__button button-gold"
+              />
             </div>
           </div>
-          <div className='glider-glide glide4'>
-            <span className='glider__overlay' />
-            <div className='glider-content'>
-              <h4 className='glider__title'>Sorties</h4>
-              <p className='glider__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <div className="glider-glide glide4">
+            <span className="glider__overlay" />
+            <div className="glider-content">
+              <h4 className="glider__title">Sorties</h4>
+              <p className="glider__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
-              <Button buttonText='Visit' buttonLink='#' buttonClass='glider__button button-gold' />
+              <Button
+                buttonText="Visit"
+                buttonLink="#"
+                buttonClass="glider__button button-gold"
+              />
             </div>
           </div>
-          <div className='glider-glide glide5'>
-            <span className='glider__overlay' />
-            <div className='glider-content'>
-              <h4 className='glider__title'>Fissures</h4>
-              <p className='glider__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <div className="glider-glide glide5">
+            <span className="glider__overlay" />
+            <div className="glider-content">
+              <h4 className="glider__title">Fissures</h4>
+              <p className="glider__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
-              <Button buttonText='Visit' buttonLink='#' buttonClass='glider__button button-gold' />
+              <Button
+                buttonText="Visit"
+                buttonLink="#"
+                buttonClass="glider__button button-gold"
+              />
             </div>
           </div>
-          <div className='glider-glide glide6'>
-            <span className='glider__overlay' />
-            <div className='glider-content'>
-              <h4 className='glider__title'>Cycles</h4>
-              <p className='glider__text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <div className="glider-glide glide6">
+            <span className="glider__overlay" />
+            <div className="glider-content">
+              <h4 className="glider__title">Cycles</h4>
+              <p className="glider__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
-              <Button buttonText='Visit' buttonLink='#' buttonClass='glider__button button-gold' />
+              <Button
+                buttonText="Visit"
+                buttonLink="#"
+                buttonClass="glider__button button-gold"
+              />
             </div>
           </div>
         </Glider>
@@ -112,7 +155,7 @@ const Home: React.FC = () => {
           <div className='home-side'>
             <h4 className='home-side__title'>Latest News:</h4>
             {
-              news.news.reverse().slice(0, 1).map((news: INews, index: number) => (
+              news.news.reverse().slice(0, 1).map((news: INewsState, index: number) => (
                 <div className='home-side__container' key={index}>
                   <img src={news.imageLink} className='home-side__image' alt='asset' />
                   <h5 className='home-side__title'>{news.message}</h5>
@@ -120,20 +163,43 @@ const Home: React.FC = () => {
               ))
             }
           </div>
-          <div className='home-side'>
+          <div className="duo-wrapper">
             {alerts.alerts.length === 0 ? (
               <div className='home-side__empty'>
                 <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
                 <h4>There are no alerts at the moment!</h4>
               </div>
             ) : (
-                alerts.alerts.map((alert: IAlerts, index: number) => (
+                alerts.alerts.map((alert: IAlertsState, index: number) => (
                   <div className='home-side__data' key={index}>
-                    <h4>{alert.node}</h4>
-                    <h5>{alert.faction}</h5>
+                    <h4>Alerts: </h4>
+                    <h4>{alert.mission.description}</h4>
+                    <h4>{alert.mission.node}</h4>
+                    <h5>{alert.mission.faction}</h5>
+                    <Button
+                      buttonText="Details"
+                      buttonLink="/alert"
+                      buttonClass="button button-gold"
+                    />
                   </div>
                 ))
               )}
+          </div>
+          <div className="twitter">
+            <div className="twitter-feed">
+              <h3 className='twitter-title'>Twitter Feed</h3>
+            </div>
+            <Timeline
+              dataSource={{
+                sourceType: 'profile',
+                screenName: 'PlayWarframe'
+              }}
+              options={{
+                width: '400',
+                height: '600'
+              }}
+              renderError={(_err: ReactNode) => <p className='twitter-title'>Could not load feed</p>}
+            />
           </div>
         </div>
 
@@ -173,7 +239,7 @@ const Home: React.FC = () => {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
           <div className='home-fissures__layout'>
             {
-              itemRandomizer(fissures.fissures).slice(0, 3).map((fissure: IFissures, index: number) => (
+              itemRandomizer(fissures.fissures).slice(0, 3).map((fissure: IFissuresState, index: number) => (
                 <div className='home-fissures__container' key={index}>
                   <div className='home-fissures__wrapper'>
                     <h5>{fissure.tier} T{fissure.tierNum}</h5>
@@ -189,7 +255,7 @@ const Home: React.FC = () => {
         </div>
       </section>
     </>
-  )
+  );
 }
 
 export default Home;
