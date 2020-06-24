@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { IFrames, IFramesProps } from '../interfaces';
-import { requestFrameData } from '../actions/actions';
 import Input from '../components/input'
 import CardRegular from '../components/card/cardRegular';
 import Loader from '../components/loader'
@@ -18,12 +17,6 @@ const Frames: React.FC = () => {
   const filteredFrames = framesData.frames && framesData.frames.filter((frame: IFrames) => frame.name.toLowerCase().indexOf(searchValue) !== -1);
 
   console.log(framesData.frames);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(requestFrameData());
-  }, [dispatch])
 
   return (
     <>

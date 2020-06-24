@@ -20,7 +20,21 @@ import {
   requestLoginFailed,
   REQUEST_REGISTER,
   REQUEST_LOGIN,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  REQUEST_WEAPON_DATA,
+  REQUEST_FRAME_DATA,
+  REQUEST_NEWS_DATA,
+  REQUEST_MOD_DATA,
+  REQUEST_ARCANE_DATA,
+  REQUEST_RESOURCE_DATA,
+  REQUEST_CETUS_CYCLE_DATA,
+  REQUEST_VALLIS_CYCLE_DATA,
+  REQUEST_ALERTS_DATA,
+  REQUEST_EVENTS_DATA,
+  REQUEST_DEALS_DATA,
+  REQUEST_FISSURE_DATA,
+  REQUEST_SORTIE_DATA,
+  REQUEST_INVASIONS_DATA
 } from '../actions/actions';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import jwt from "jsonwebtoken";
@@ -168,12 +182,12 @@ function* callRequestRegister(action: IAction) {
   results = JSON.parse(results);
   if (typeof results.token == typeof undefined) {
     yield put(receiveRegisterFailed(results));
+  } else {
+    const token = results.token;
+    localStorage.setItem("x-auth-token", token);
+    const Tokendecode = yield jwt.decode(token);
+    yield put(receiveRegister(Tokendecode));
   }
-  const token = results.token;
-  localStorage.setItem("x-auth-token", token);
-  const Tokendecode = yield jwt.decode(token);
-  localStorage.setItem('User', Tokendecode.user.email)
-  yield put(receiveRegister(Tokendecode));
 }
 
 function* callRequestLogin(action: IAction) {
@@ -182,44 +196,49 @@ function* callRequestLogin(action: IAction) {
     results = JSON.parse(results);
     if (typeof results.token == typeof undefined) {
       yield put(requestLoginFailed(results));
+    } else {
+      const token = results.token;
+      localStorage.setItem("x-auth-token", token);
+      const Tokendecode = yield jwt.decode(token);
+      console.log('Token: ', Tokendecode);
+      yield put(receiveLogin(Tokendecode));
     }
-    const token = results.token;
-    localStorage.setItem("x-auth-token", token);
-    const Tokendecode = yield jwt.decode(token);
-    localStorage.setItem('User', Tokendecode.user.email);
-    yield put(receiveLogin(Tokendecode));
   } catch (e) {
     return
   }
 }
 
 function* logout() {
-  localStorage.removeItem('x-auth.token');
-  localStorage.removeItem('User');
+  yield localStorage.removeItem('x-auth-token');
   window.location.reload();
 }
 
 
 export default function* mySaga() {
-  yield take(REHYDRATE);
   yield takeLatest(REQUEST_REGISTER, callRequestRegister);
   yield takeLatest(REQUEST_LOGIN, callRequestLogin);
+  yield take(REHYDRATE);
   yield takeLatest(LOGOUT_SUCCESS, logout);
+  yield takeLatest(REQUEST_WEAPON_DATA, fetchWeapons);
+  yield takeLatest(REQUEST_FRAME_DATA, fetchFrames);
+  yield takeLatest(REQUEST_NEWS_DATA, fetchNews);
+  yield takeLatest(REQUEST_MOD_DATA, fetchMods);
+  yield takeLatest(REQUEST_ARCANE_DATA, fetchArcanes);
+  yield takeLatest(REQUEST_RESOURCE_DATA, fetchResources);
+  yield takeLatest(REQUEST_CETUS_CYCLE_DATA, fetchCetusCycle);
+  yield takeLatest(REQUEST_VALLIS_CYCLE_DATA, fetchVallisCycle);
+  yield takeLatest(REQUEST_ALERTS_DATA, fetchAlerts);
+  yield takeLatest(REQUEST_EVENTS_DATA, fetchEvents);
+  yield takeLatest(REQUEST_DEALS_DATA, fetchDeals);
+  yield takeLatest(REQUEST_FISSURE_DATA, fetchFissures);
+  yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
+  yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
+
   yield all([
-    fork(fetchInvasions),
-    fork(fetchWeapons),
-    fork(fetchFrames),
-    fork(fetchNews),
-    fork(fetchMods),
-    fork(fetchArcanes),
-    fork(fetchResources),
-    fork(fetchCetusCycle),
-    fork(fetchVallisCycle),
-    fork(fetchAlerts),
-    fork(fetchEvents),
-    fork(fetchDeals),
     fork(fetchFissures),
-    fork(fetchSorties),
+    fork(fetchAlerts),
     fork(fetchInvasions),
+    fork(fetchNews),
+    fork(fetchFrames),
   ])
 }

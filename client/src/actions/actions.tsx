@@ -128,7 +128,6 @@ export const receiveInvasions = (invasions: IInvasionsState) => ({ type: RECEIVE
 
 export const requestLogin = createAction(REQUEST_LOGIN);
 export const receiveLogin = createAction(REQUEST_LOGIN_SUCCESS);
-
 export const requestLoginFailed = createAction(REQUEST_LOGIN_FAILED);
 
 export const requestRegister = createAction(REQUEST_REGISTER);

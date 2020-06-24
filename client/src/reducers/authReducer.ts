@@ -11,7 +11,6 @@ const defaultState: IUser = {
   isLoading: false,
   loginErrorMessage: '',
   signUpErrorMessage: '',
-  errorMessage: '',
   loggedIn: false
 };
 
@@ -25,7 +24,7 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         isLoading: true
       };
     case "REQUEST_LOGIN_SUCCESS":
-      window.location.href = '/'
+      // window.location.href = '/'
       return {
         ...state,
         isAuthenticated: true,
@@ -46,9 +45,24 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
     case "REQUEST_LOGIN_FAILED":
       return {
         ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        loggedIn: false,
         loginErrorMessage: action.payload
       }
     case "LOGOUT_SUCCESS":
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        loggedIn: false,
+        signUpErrorMessage: '',
+        loginErrorMessage: ''
+      }
     case "REQUEST_REGISTER_FAILED":
       return {
         ...state,

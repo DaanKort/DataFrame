@@ -4,8 +4,6 @@ interface Base {
   type: string;
   payload?: any;
   isLoading: boolean;
-  loginErrorMessage?: string
-  signUpErrorMessage?: string
   errorMessage?: string
 }
 
@@ -108,9 +106,6 @@ export interface ISorties extends Base {
   sorties: {};
 }
 
-// export interface IInvasions extends Base {
-//   invasions: [];
-// }
 export interface IUser extends Base {
   email: string;
   password: string;
@@ -119,6 +114,8 @@ export interface IUser extends Base {
   isAuthenticated: boolean;
   token: string | null;
   loggedIn: boolean;
+  loginErrorMessage: string;
+  signUpErrorMessage: string;
 }
 export interface IAction {
   type: typeof REQUEST_LOGIN,

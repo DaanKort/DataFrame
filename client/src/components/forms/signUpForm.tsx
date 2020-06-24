@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, } from "react-redux";
 import Button from "../button/index";
 import Input from "../input/index"
@@ -24,6 +24,12 @@ const SignUpForm: React.FC = () => {
         password: '',
     });
 
+    const [AuthError, setAuthError] = useState('');
+
+    useEffect(() => {
+        setAuthError(signupErrorMsg);
+    }, [signupErrorMsg])
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
     };
@@ -37,13 +43,12 @@ const SignUpForm: React.FC = () => {
                 password: user.password
             }),
         );
-        !signupError && console.log('redirected');
     };
     return (
         <div className='form'>
             <h2 className='news__title'>Sign Up</h2>
             {
-                signupError && <p>{signupErrorMsg}</p>
+                AuthError && <p>{AuthError}</p>
             }
             <Input
                 type="text"

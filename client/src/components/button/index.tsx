@@ -1,10 +1,10 @@
 import React from 'react';
 
-export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButtonProps {
   buttonLink?: string,
   buttonText: string,
   buttonClass?: string
-  onClick? : () => void;
+  onClick?: () => void;
 }
 
 export default function Button(props: IButtonProps) {
@@ -12,7 +12,7 @@ export default function Button(props: IButtonProps) {
 
   return (
     <>
-      <a className={`button ${buttonClass}`} href={buttonLink} onClick={onClick}>
+      <a className={`button ${buttonClass}`} href={buttonLink} onClick={onClick} >
         <span />
         <span />
         <span />

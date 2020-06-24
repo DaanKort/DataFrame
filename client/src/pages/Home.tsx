@@ -62,6 +62,7 @@ const Home: React.FC = () => {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -79,6 +80,7 @@ const Home: React.FC = () => {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -96,6 +98,7 @@ const Home: React.FC = () => {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -113,6 +116,7 @@ const Home: React.FC = () => {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -130,6 +134,7 @@ const Home: React.FC = () => {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -147,6 +152,7 @@ const Home: React.FC = () => {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -180,6 +186,7 @@ const Home: React.FC = () => {
                       buttonText="Details"
                       buttonLink="/alert"
                       buttonClass="button button-gold"
+                      
                     />
                   </div>
                 ))
@@ -229,7 +236,7 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className='home-invasions__wrap'>
-            <Button buttonText='Visit' buttonLink='/invasions' buttonClass='button-gold home-invasions__button' />
+            <Button buttonText='Visit' buttonLink='/invasions' buttonClass='button-gold home-invasions__button'  />
           </div>
         </div>
 
@@ -251,7 +258,7 @@ const Home: React.FC = () => {
               ))
             }
           </div>
-          <Button buttonText='Visit' buttonLink='/fissures' buttonClass='button-gold home-fissures__button' />
+          <Button buttonText='Visit' buttonLink='/fissures' buttonClass='button-gold home-fissures__button'  />
         </div>
       </section>
     </>
