@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, TouchEventHandler } from 'react';
+import React, { ReactEventHandler } from 'react';
 
 export interface IButtonProps {
   buttonLink?: string,

@@ -41,6 +41,7 @@ const SignUpForm: React.FC = () => {
                 displayName: user.displayName
             }),
         );
+        setAuthError('');
         setAuthError(signupErrorMsg);
     };
     return (
@@ -88,6 +89,7 @@ const SignUpForm: React.FC = () => {
                 buttonText="Register"
                 buttonClass="button button-primary"
                 onClick={handleSignUp}
+                onTouch={handleSignUp}
             />
         </div>
     )

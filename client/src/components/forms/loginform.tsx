@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector, } from "react-redux";
 import Button from "../button/index";
 import Input from "../input/index"
@@ -28,8 +28,7 @@ const Loginform: React.FC = () => {
   };
 
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleLogin = () => {
     dispatch(
       requestLogin({
         email: user.email,
@@ -44,7 +43,7 @@ const Loginform: React.FC = () => {
     <div className='form'>
       <h2 className='news__title'>Login</h2>
       {
-        AuthError && <p>{AuthError}</p>
+        <p>{AuthError}</p>
       }
       <Input
         type="email"
@@ -63,7 +62,7 @@ const Loginform: React.FC = () => {
       <Button
         buttonText="Login"
         buttonClass="button button-primary"
-        // onClick={handleLogin}
+        onClick={handleLogin}
         onTouch={handleLogin}
       />
     </div>
