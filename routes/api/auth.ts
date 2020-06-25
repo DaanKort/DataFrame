@@ -33,7 +33,8 @@ router.post(
         jwt.sign(
           {
             id: user.id,
-            email: user.email
+            email: user.email,
+            name: user.name
           },
           config.get("jwtSecret"),
           { expiresIn: 3600 },

@@ -8,7 +8,7 @@ const User = require("../../models/User");
 
 //@route POST api/user
 router.post("/", (req: express.Request, res: express.Response) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, displayName } = req.body;
 
   //Field validation
   if (!firstName || !lastName || !email || !password) {
@@ -27,6 +27,7 @@ router.post("/", (req: express.Request, res: express.Response) => {
     const newUser = new User({
       firstName,
       lastName,
+      displayName,
       email,
       password
     });
@@ -41,7 +42,8 @@ router.post("/", (req: express.Request, res: express.Response) => {
             { user: {
               id: user._id,
               name: user.name,
-              email: user.email
+              email: user.email,
+              displayName: user.displayName
             } },
             config.get("jwtSecret"),
             { expiresIn: 3600 },
@@ -52,7 +54,8 @@ router.post("/", (req: express.Request, res: express.Response) => {
                 user: {
                   id: user._id,
                   name: user.name,
-                  email: user.email
+                  email: user.email,
+                  displayName: user.displayName
                 },
                 message: "Signed up!"
               });

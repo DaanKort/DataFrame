@@ -111,6 +111,7 @@ export interface IUser extends Base {
   password: string;
   firstName: string;
   lastName: string;
+  displayName: string;
   isAuthenticated: boolean;
   token: string | null;
   loggedIn: boolean;

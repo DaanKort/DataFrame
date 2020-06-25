@@ -15,9 +15,11 @@ interface IState {
 
 interface IAuth {
   auth: {};
-  email: string;
-  id: string;
-  loggedIn: boolean
+  loggedIn: boolean;
+  user: {
+    email: string;
+    id: string
+  }
 }
 
 export default function Nav() {
@@ -27,7 +29,6 @@ export default function Nav() {
     !navMenu ? setNavMenu(true) : setNavMenu(false);
   }
   const auth: IAuth = useSelector<IAuth>(state => state.auth) as IAuth;
-  console.log(auth.email);
 
   const navToggleDesktop = () => {
     const nav = document.querySelectorAll('.nav');
@@ -89,7 +90,7 @@ export default function Nav() {
             <img className='nav__logo' src={Brand} alt='brand' />
             <h5 className='nav__text nav__text--brand'>DataFrame</h5>
           </Link>
-          <p className='nav__text nav__text--email'>{auth.loggedIn && auth.email}</p>
+          <p className='nav__text nav__text--email'>{auth.loggedIn && auth.user && auth.user.email}</p>
           <ul className={!navMenu ? 'nav-list' : 'nav-list nav-list--open'}>
             <Link to='/news' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>

@@ -12,7 +12,7 @@ interface ILogin {
 }
 
 const Loginform: React.FC = () => {
-  const loginError: ILogin = useSelector<ILogin>(state => state.auth.loginErrorMessage) as ILogin;
+  const loginError = useSelector<ILogin>(state => state.auth.loginErrorMessage) as ILogin;
   const loginErrorMsg: string = loginError.message;
   const dispatch = useDispatch();
 
@@ -23,21 +23,21 @@ const Loginform: React.FC = () => {
 
   const [AuthError, setAuthError] = useState('');
 
-  useEffect(() => {
-    setAuthError(loginErrorMsg);
-  }, [loginErrorMsg])
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value })
   };
 
-  const handleLogin = () => {
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(
       requestLogin({
         email: user.email,
         password: user.password
       })
     );
+    setAuthError('');
+    setAuthError(loginErrorMsg);
   }
 
   return (
@@ -63,7 +63,8 @@ const Loginform: React.FC = () => {
       <Button
         buttonText="Login"
         buttonClass="button button-primary"
-        onClick={() => handleLogin()}
+        // onClick={handleLogin}
+        onTouch={handleLogin}
       />
     </div>
   )

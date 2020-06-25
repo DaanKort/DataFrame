@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector, } from "react-redux";
 import Button from "../button/index";
 import Input from "../input/index"
@@ -22,13 +22,10 @@ const SignUpForm: React.FC = () => {
         lastName: '',
         email: '',
         password: '',
+        displayName: ''
     });
 
     const [AuthError, setAuthError] = useState('');
-
-    useEffect(() => {
-        setAuthError(signupErrorMsg);
-    }, [signupErrorMsg])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -40,15 +37,17 @@ const SignUpForm: React.FC = () => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                password: user.password
+                password: user.password,
+                displayName: user.displayName
             }),
         );
+        setAuthError(signupErrorMsg);
     };
     return (
         <div className='form'>
             <h2 className='news__title'>Sign Up</h2>
             {
-                AuthError && <p>{AuthError}</p>
+                <p>{AuthError}</p>
             }
             <Input
                 type="text"
@@ -61,6 +60,13 @@ const SignUpForm: React.FC = () => {
                 type="text"
                 name="lastName"
                 inputPlaceholder='Last Name'
+                inputWrapperClass='signup-input'
+                onInputChange={handleChange}
+            />
+            <Input
+                type="text"
+                name="displayName"
+                inputPlaceholder='Display Name'
                 inputWrapperClass='signup-input'
                 onInputChange={handleChange}
             />
@@ -81,7 +87,7 @@ const SignUpForm: React.FC = () => {
             <Button
                 buttonText="Register"
                 buttonClass="button button-primary"
-                onClick={() => handleSignUp()}
+                onClick={handleSignUp}
             />
         </div>
     )
