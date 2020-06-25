@@ -9,7 +9,8 @@ import mySaga from '../sagas/sagas'
 const persistConfig = {
   key: 'root',
   storage: storage,
-  stateReconciler: autoMergeLevel1
+  stateReconciler: autoMergeLevel1,
+  blacklist: ['error']
 };
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = composeWithDevTools({
@@ -24,7 +25,7 @@ const store = createStore(pReducer,
     applyMiddleware(sagaMiddleware),
   ));
 const persistor = persistStore(
-  store
+  store,
 );
 export { persistor, store };
 

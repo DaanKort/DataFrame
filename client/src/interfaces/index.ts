@@ -126,9 +126,7 @@ export interface IAction {
 export interface IError {
   type: string | null;
   payload?: any;
-  message: {};
-  id: number | null;
-  status: number | null;
+  message: '';
 }
 export interface IInvasions {
   node: string,

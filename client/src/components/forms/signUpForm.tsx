@@ -4,17 +4,17 @@ import Button from "../button/index";
 import Input from "../input/index"
 import { requestRegister } from "../../actions/actions";
 
-interface ISignUp {
-    auth: {
-        signUpErrorMessage: string;
+interface IError {
+    error: {
+        signUpErrorMessage: string
     }
-    message: string;
+    message: string
 }
 
 
 const SignUpForm: React.FC = () => {
-    const signupError: ISignUp = useSelector<ISignUp>(state => state.auth.signUpErrorMessage) as ISignUp;
-    const signupErrorMsg: string = signupError.message;
+    const signupError: IError = useSelector<IError>(state => state.error.signUpErrorMessage) as IError;
+    const signupErrorMsg: string = signupError && signupError.message;
     const dispatch = useDispatch();
 
     const [user, setUser] = useState({
@@ -24,8 +24,6 @@ const SignUpForm: React.FC = () => {
         password: '',
         displayName: ''
     });
-
-    const [AuthError, setAuthError] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -41,14 +39,12 @@ const SignUpForm: React.FC = () => {
                 displayName: user.displayName
             }),
         );
-        setAuthError('');
-        setAuthError(signupErrorMsg);
     };
     return (
         <div className='form'>
             <h2 className='news__title'>Sign Up</h2>
             {
-                <p>{AuthError}</p>
+                <p>{signupErrorMsg}</p>
             }
             <Input
                 type="text"

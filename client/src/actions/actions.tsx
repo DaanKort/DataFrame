@@ -67,7 +67,8 @@ export const REQUEST_REGISTER_SUCCESS = "REQUEST_REGISTER_SUCCESS";
 export const REQUEST_REGISTER_FAILED = "REQUEST_REGISTER_FAILED";
 export const AUTH_ERROR = "AUTH_ERROR";
 
-export const GET_ERRORS = "GET_ERRORS";
+export const GET_LOGIN_ERRORS = "GET_LOGIN_ERRORS";
+export const GET_SIGNUP_ERRORS = "GET_SIGNUP_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 export const requestFrameData = () => ({ type: REQUEST_FRAME_DATA })
@@ -138,5 +139,6 @@ export const logoutSuccess = createAction(LOGOUT_SUCCESS);
 
 export const authError = createAction(AUTH_ERROR);
 
-export const getErrors = createAction(GET_ERRORS);
+export const getLoginErrors = createAction(GET_LOGIN_ERRORS);
+export const getSignUpErrors = createAction(GET_SIGNUP_ERRORS);
 export const clearErrors = createAction(CLEAR_ERRORS);

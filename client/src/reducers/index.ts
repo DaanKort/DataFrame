@@ -14,6 +14,7 @@ import { fissuresReducer, FissureState } from "./fissuresReducer";
 import { sortieReducer, SortieState } from "./sortiesReducer";
 import { invasionsReducer, InvasionsState } from "./invasionsReducer";
 import { authReducer, AuthState } from "./authReducer";
+import { errorReducer, ErrorState } from "./errorReducer";
 
 export interface State {
   news: NewsState;
@@ -31,6 +32,7 @@ export interface State {
   sorties: SortieState;
   invasions: InvasionsState;
   auth: AuthState;
+  error: ErrorState
 }
 
 const rootReducer = combineReducers<State>({
@@ -48,7 +50,8 @@ const rootReducer = combineReducers<State>({
   fissures: fissuresReducer,
   sorties: sortieReducer,
   invasions: invasionsReducer,
-  auth: authReducer
+  auth: authReducer,
+  error: errorReducer
 });
 
 export default rootReducer;

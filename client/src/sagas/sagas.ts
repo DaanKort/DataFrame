@@ -15,9 +15,7 @@ import {
   receiveSorties,
   receiveInvasions,
   receiveLogin,
-  receiveRegisterFailed,
   receiveRegister,
-  requestLoginFailed,
   REQUEST_REGISTER,
   REQUEST_LOGIN,
   LOGOUT_SUCCESS,
@@ -34,7 +32,9 @@ import {
   REQUEST_DEALS_DATA,
   REQUEST_FISSURE_DATA,
   REQUEST_SORTIE_DATA,
-  REQUEST_INVASIONS_DATA
+  REQUEST_INVASIONS_DATA,
+  getLoginErrors,
+  getSignUpErrors
 } from '../actions/actions';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import jwt from "jsonwebtoken";
@@ -181,7 +181,7 @@ function* callRequestRegister(action: IAction) {
   let results = yield call(Register, action.payload);
   results = JSON.parse(results);
   if (typeof results.token == typeof undefined) {
-    yield put(receiveRegisterFailed(results));
+    yield put(getSignUpErrors(results));
   } else {
     const token = results.token;
     localStorage.setItem("x-auth-token", token);
@@ -195,7 +195,7 @@ function* callRequestLogin(action: IAction) {
     let results = yield call(Login, action.payload);
     results = JSON.parse(results);
     if (typeof results.token == typeof undefined) {
-      yield put(requestLoginFailed(results));
+      yield put(getLoginErrors(results));
     } else {
       const token = results.token;
       localStorage.setItem("x-auth-token", token);

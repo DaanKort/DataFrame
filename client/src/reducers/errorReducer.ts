@@ -1,10 +1,8 @@
 import { IError } from "../interfaces";
 
 const defaultState: IError = {
-  message: {},
-  status: null,
-  id: null,
-  type: ""
+  message: '',
+  type: ''
 };
 
 export type ErrorState = {};
@@ -14,17 +12,17 @@ export const errorReducer = (
   action: IError
 ) => {
   switch (action.type) {
-    case "GET_ERROR":
+    case "GET_LOGIN_ERRORS":
       return {
-        message: action.payload.message,
-        status: action.payload.status,
-        id: action.payload.id
+        loginErrorMessage: action.payload
+      };
+    case "GET_SIGNUP_ERRORS":
+      return {
+        signUpErrorMessage: action.payload
       };
     case "CLEAR_ERROR":
       return {
-        message: {},
-        status: null,
-        id: null
+        message: '',
       };
     default:
       return state;

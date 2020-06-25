@@ -4,16 +4,16 @@ import Button from "../button/index";
 import Input from "../input/index"
 import { requestLogin } from "../../actions/actions";
 
-interface ILogin {
-  auth: {
+interface IError {
+  error: {
     loginErrorMessage: string
   }
   message: string
 }
 
 const Loginform: React.FC = () => {
-  const loginError = useSelector<ILogin>(state => state.auth.loginErrorMessage) as ILogin;
-  const loginErrorMsg: string = loginError.message;
+  const loginError = useSelector<IError>(state => state.error.loginErrorMessage) as IError;
+  const loginErrorMsg: string = loginError && loginError.message;
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -21,7 +21,6 @@ const Loginform: React.FC = () => {
     password: '',
   });
 
-  const [AuthError, setAuthError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value })
@@ -35,15 +34,13 @@ const Loginform: React.FC = () => {
         password: user.password
       })
     );
-    setAuthError('');
-    setAuthError(loginErrorMsg);
   }
 
   return (
     <div className='form'>
       <h2 className='news__title'>Login</h2>
       {
-        <p>{AuthError}</p>
+        <p>{loginErrorMsg}</p>
       }
       <Input
         type="email"
