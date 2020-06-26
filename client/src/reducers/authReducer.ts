@@ -10,8 +10,6 @@ const defaultState: IUser = {
   type: "",
   isAuthenticated: false,
   isLoading: false,
-  loginErrorMessage: '',
-  signUpErrorMessage: '',
   loggedIn: false
 };
 
@@ -30,8 +28,8 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        user: action.payload,
-        loggedIn: true
+        loggedIn: true,
+        user: action.payload
       };
     case "REQUEST_REGISTER_SUCCESS":
       window.location.href = '/'
@@ -61,8 +59,6 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         isAuthenticated: false,
         isLoading: false,
         loggedIn: false,
-        signUpErrorMessage: '',
-        loginErrorMessage: ''
       }
     case "REQUEST_REGISTER_FAILED":
       return {
@@ -72,7 +68,6 @@ export const authReducer = (state: AuthState = defaultState, action: IUser) => {
         isAuthenticated: false,
         isLoading: false,
         loggedIn: false,
-        signUpErrorMessage: action.payload
       };
     default:
       return state;

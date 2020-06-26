@@ -115,8 +115,6 @@ export interface IUser extends Base {
   isAuthenticated: boolean;
   token: string | null;
   loggedIn: boolean;
-  loginErrorMessage: string;
-  signUpErrorMessage: string;
 }
 export interface IAction {
   type: typeof REQUEST_LOGIN,

@@ -184,7 +184,7 @@ function* callRequestRegister(action: IAction) {
     yield put(getSignUpErrors(results));
   } else {
     const token = results.token;
-    localStorage.setItem("x-auth-token", token);
+    sessionStorage.setItem("x-auth-token", token);
     const Tokendecode = yield jwt.decode(token);
     yield put(receiveRegister(Tokendecode));
   }
@@ -198,7 +198,7 @@ function* callRequestLogin(action: IAction) {
       yield put(getLoginErrors(results));
     } else {
       const token = results.token;
-      localStorage.setItem("x-auth-token", token);
+      sessionStorage.setItem("x-auth-token", token);
       const Tokendecode = yield jwt.decode(token);
       console.log('Token: ', Tokendecode);
       yield put(receiveLogin(Tokendecode));
