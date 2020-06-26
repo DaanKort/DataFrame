@@ -12,14 +12,12 @@ export default function News() {
     dispatch(requestNews());
   }, [dispatch]);
 
-  let newsData = news.news;
-
   return (
     <section className='news-page boxed'>
       <h2 className='news__title'>News</h2>
       <div className='news'>
         {
-          newsData.reverse().map((news: INewsState, index: number) => (
+          news.news.map((news: INewsState, index: number) => (
             <div className='news-container' key={index}>
               <div className='news-title'>
                 <h4 className='news-title__text'>{news.message}</h4>

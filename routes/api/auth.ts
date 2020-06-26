@@ -31,10 +31,10 @@ router.post(
           return res.status(400).json({ message: "Invalid credentials" });
 
         jwt.sign(
-          { user: {
-              id: user.id,
-              email: user.email
-            } 
+          {
+            id: user.id,
+            email: user.email,
+            name: user.name
           },
           config.get("jwtSecret"),
           { expiresIn: 3600 },

@@ -1,0 +1,71 @@
+.frames-button-back {
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    text-align: center;
+}
+
+.frame {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+
+    @include desktop {
+        align-items: unset;
+        flex-direction: unset;
+    }
+
+    &-header-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &-init {
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-stats {
+        padding: 30px;
+        @include desktop {
+            width: 600px;
+        }
+    }
+
+    &-img {
+        padding: 50px;
+        max-width: 450px;
+    }
+
+    &-info {
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        
+        &__combat {
+            padding: 5px 0;
+        }
+    }
+    &-ability-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    .gold {
+        color: $gold;
+    }
+    .regular {
+        color: $white;
+        margin: 5px 0;
+    }
+}
+
+.loading-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -4,9 +4,32 @@ interface Base {
   type: string;
   payload?: any;
   isLoading: boolean;
-  loginErrorMessage?: string
-  signUpErrorMessage?: string
   errorMessage?: string
+}
+
+export interface IFrames {
+  [x: string]: any;
+  frames: []
+  type: string,
+  isLoading: boolean,
+  payload?: any,
+  errorMessage: string,
+}
+
+export interface IFramesProps {
+  name: string;
+  wikiaThumbnail: string;
+  id: number;
+  description: string;
+  health: number;
+  shield: number;
+  abilities: any
+}
+
+export interface INews {
+  message: string,
+  link: string,
+  imageLink: string
 }
 export interface IWeapons extends Base {
   weapons: [];
@@ -83,14 +106,12 @@ export interface ISorties extends Base {
   sorties: {};
 }
 
-// export interface IInvasions extends Base {
-//   invasions: [];
-// }
 export interface IUser extends Base {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
+  displayName: string;
   isAuthenticated: boolean;
   token: string | null;
   loggedIn: boolean;
@@ -103,9 +124,7 @@ export interface IAction {
 export interface IError {
   type: string | null;
   payload?: any;
-  message: {};
-  id: number | null;
-  status: number | null;
+  message: '';
 }
 export interface IInvasions {
   node: string,

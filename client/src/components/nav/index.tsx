@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Brand from '../../assets/images/brand-white.png';
 import Button from '../button/index';
 import { logoutSuccess } from "../../actions/actions";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { faNewspaper, faFistRaised, faDatabase, faSkullCrossbones, faMeteor, faCloud, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,14 @@ interface IState {
   loggedIn: boolean;
 }
 
-const userEmail = localStorage.getItem('User');
+interface IAuth {
+  auth: {};
+  loggedIn: boolean;
+  user: {
+    email: string;
+    id: string
+  }
+}
 
 export default function Nav() {
   const dispatch = useDispatch();
@@ -21,6 +28,7 @@ export default function Nav() {
   const navToggle = () => {
     !navMenu ? setNavMenu(true) : setNavMenu(false);
   }
+  const auth: IAuth = useSelector<IAuth>(state => state.auth) as IAuth;
 
   const navToggleDesktop = () => {
     const nav = document.querySelectorAll('.nav');
@@ -82,7 +90,7 @@ export default function Nav() {
             <img className='nav__logo' src={Brand} alt='brand' />
             <h5 className='nav__text nav__text--brand'>DataFrame</h5>
           </Link>
-          <p className='nav__text nav__text--email'>{userEmail}</p>
+          <p className='nav__text nav__text--email'>{auth.loggedIn && auth.user && auth.user.email}</p>
           <ul className={!navMenu ? 'nav-list' : 'nav-list nav-list--open'}>
             <Link to='/news' className='nav__link' onClick={navToggle}>
               <li className='nav__item'>
@@ -121,11 +129,11 @@ export default function Nav() {
               </li>
             </Link>
             {
-              !userEmail ? <Button buttonText='Login' buttonLink='/register' buttonClass='nav__button button-primary' /> : <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' onClick={() => handleLogout()} />
+              !auth.loggedIn ? <Button buttonText='Login' buttonLink='/register' buttonClass='nav__button button-primary' /> : <Button buttonText='Logout' buttonLink='#' buttonClass='nav__button button-primary' onClick={() => handleLogout()} />
             }
 
             {
-              !navMenu && <Link to='/register' className='nav__link'>
+              !navMenu && !auth.loggedIn && <Link to='/register' className='nav__link'>
                 <li className='nav__item'>
                   <FontAwesomeIcon icon={faSignInAlt} className='nav__asset' />
                 </li>

@@ -1,45 +1,47 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, call, take, all, fork, takeLatest } from 'redux-saga/effects'
 import {
-  REQUEST_WEAPON_DATA,
   receiveWeaponData,
-  REQUEST_FRAME_DATA,
   receiveFrameData,
-  REQUEST_NEWS_DATA,
   receivedNews,
-  REQUEST_MOD_DATA,
   receivedMods,
-  REQUEST_ARCANE_DATA,
   receivedArcanes,
-  REQUEST_RESOURCE_DATA,
   receivedResources,
-  REQUEST_CETUS_CYCLE_DATA,
   receiveCetusCycle,
-  REQUEST_VALLIS_CYCLE_DATA,
   receiveVallisCycle,
-  REQUEST_ALERTS_DATA,
   receiveAlerts,
-  REQUEST_EVENTS_DATA,
   receiveEvents,
-  REQUEST_DEALS_DATA,
   receiveDeals,
-  REQUEST_FISSURE_DATA,
   receiveFissures,
-  REQUEST_SORTIE_DATA,
   receiveSorties,
-  REQUEST_INVASIONS_DATA,
   receiveInvasions,
-  REQUEST_LOGIN,
-  requestLoginFailed,
-  REQUEST_REGISTER,
-  receiveRegisterFailed,
-  receiveRegister,
   receiveLogin,
-  LOGOUT_SUCCESS
-} from "../actions/actions";
-
-import { api, Register, Login } from "../api/api";
+  receiveRegister,
+  REQUEST_REGISTER,
+  REQUEST_LOGIN,
+  LOGOUT_SUCCESS,
+  REQUEST_WEAPON_DATA,
+  REQUEST_FRAME_DATA,
+  REQUEST_NEWS_DATA,
+  REQUEST_MOD_DATA,
+  REQUEST_ARCANE_DATA,
+  REQUEST_RESOURCE_DATA,
+  REQUEST_CETUS_CYCLE_DATA,
+  REQUEST_VALLIS_CYCLE_DATA,
+  REQUEST_ALERTS_DATA,
+  REQUEST_EVENTS_DATA,
+  REQUEST_DEALS_DATA,
+  REQUEST_FISSURE_DATA,
+  REQUEST_SORTIE_DATA,
+  REQUEST_INVASIONS_DATA,
+  getLoginErrors,
+  getSignUpErrors
+} from '../actions/actions';
+import { REHYDRATE } from 'redux-persist/lib/constants'
 import jwt from "jsonwebtoken";
-import { IAction } from "../interfaces";
+
+
+import { api, Register, Login } from '../api/api'
+import { IAction } from '../interfaces';
 
 function* fetchFrames() {
   try {
@@ -179,13 +181,13 @@ function* callRequestRegister(action: IAction) {
   let results = yield call(Register, action.payload);
   results = JSON.parse(results);
   if (typeof results.token == typeof undefined) {
-    yield put(receiveRegisterFailed(results));
+    yield put(getSignUpErrors(results));
+  } else {
+    const token = results.token;
+    sessionStorage.setItem("x-auth-token", token);
+    const Tokendecode = yield jwt.decode(token);
+    yield put(receiveRegister(Tokendecode));
   }
-  const token = results.token;
-  localStorage.setItem("x-auth-token", token);
-  const Tokendecode = yield jwt.decode(token);
-  localStorage.setItem('User', Tokendecode.user.email)
-  yield put(receiveRegister(Tokendecode));
 }
 
 function* callRequestLogin(action: IAction) {
@@ -193,26 +195,30 @@ function* callRequestLogin(action: IAction) {
     let results = yield call(Login, action.payload);
     results = JSON.parse(results);
     if (typeof results.token == typeof undefined) {
-      yield put(requestLoginFailed(results));
+      yield put(getLoginErrors(results));
+    } else {
+      const token = results.token;
+      sessionStorage.setItem("x-auth-token", token);
+      const Tokendecode = yield jwt.decode(token);
+      console.log('Token: ', Tokendecode);
+      yield put(receiveLogin(Tokendecode));
     }
-    const token = results.token;
-    localStorage.setItem("x-auth-token", token);
-    const Tokendecode = yield jwt.decode(token);
-    localStorage.setItem('User', Tokendecode.user.email);
-    yield put(receiveLogin(Tokendecode));
   } catch (e) {
     return
   }
 }
 
 function* logout() {
-  localStorage.removeItem('x-auth.token');
-  localStorage.removeItem('User');
+  yield localStorage.removeItem('x-auth-token');
   window.location.reload();
 }
 
 
 export default function* mySaga() {
+  yield takeLatest(REQUEST_REGISTER, callRequestRegister);
+  yield takeLatest(REQUEST_LOGIN, callRequestLogin);
+  yield take(REHYDRATE);
+  yield takeLatest(LOGOUT_SUCCESS, logout);
   yield takeLatest(REQUEST_WEAPON_DATA, fetchWeapons);
   yield takeLatest(REQUEST_FRAME_DATA, fetchFrames);
   yield takeLatest(REQUEST_NEWS_DATA, fetchNews);
@@ -227,7 +233,12 @@ export default function* mySaga() {
   yield takeLatest(REQUEST_FISSURE_DATA, fetchFissures);
   yield takeLatest(REQUEST_SORTIE_DATA, fetchSorties);
   yield takeLatest(REQUEST_INVASIONS_DATA, fetchInvasions);
-  yield takeLatest(REQUEST_REGISTER, callRequestRegister);
-  yield takeLatest(REQUEST_LOGIN, callRequestLogin);
-  yield takeLatest(LOGOUT_SUCCESS, logout);
+
+  yield all([
+    fork(fetchFissures),
+    fork(fetchAlerts),
+    fork(fetchInvasions),
+    fork(fetchNews),
+    fork(fetchFrames),
+  ])
 }

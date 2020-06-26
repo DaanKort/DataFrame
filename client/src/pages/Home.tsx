@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, ReactNode } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { requestNews, requestAlerts, requestFissures, requestInvasions } from '../actions/actions'
 import { INewsState, IAlertsState, IInvasions, IInvasionsState, IFissuresState } from '../interfaces/index';
@@ -11,7 +11,7 @@ import Fieldron from '../assets/images/fieldron.png';
 import Mutagen from '../assets/images/mutagen.png';
 import { Timeline } from 'react-twitter-widgets'
 
-export default function Home() {
+const Home: React.FC = () => {
   const news = useSelector<INewsState, any>(state => state.news)
   const alerts = useSelector<IAlertsState, any>(state => state.alerts)
   const fissures = useSelector<IFissuresState, any>(state => state.fissures)
@@ -25,26 +25,13 @@ export default function Home() {
     dispatch(requestInvasions());
   }, [dispatch]);
 
-  let newsData = news.news;
-  let alertsData = alerts.alerts;
-  let fissureData = fissures.fissures;
-  let invasionsData = invasions.invasions;
-
-  (() => {
-    for (let i = invasionsData.length - 1; i > 0; i--) {
+  const itemRandomizer = (array: []) => {
+    for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [invasionsData[i], invasionsData[j]] = [invasionsData[j], invasionsData[i]];
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return invasionsData;
-  })();
-
-  (() => {
-    for (let i = fissureData.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [fissureData[i], fissureData[j]] = [fissureData[j], fissureData[i]];
-    }
-    return fissureData;
-  })();
+    return array;
+  }
 
   const gliderSettings = {
     dots: true,
@@ -75,6 +62,7 @@ export default function Home() {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -92,6 +80,7 @@ export default function Home() {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -109,6 +98,7 @@ export default function Home() {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -126,6 +116,7 @@ export default function Home() {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -143,6 +134,7 @@ export default function Home() {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
@@ -160,45 +152,45 @@ export default function Home() {
                 buttonText="Visit"
                 buttonLink="#"
                 buttonClass="glider__button button-gold"
+                
               />
             </div>
           </div>
         </Glider>
         <div className='home-duo home--spacing boxed'>
           <div className='home-side'>
-            <div className='home-side'>
-              <h4 className='home-side__title'>Latest News:</h4>
-              {
-                newsData.reverse().slice(0, 1).map((news: INewsState, index: number) => (
-                  <div className='home-side__container' key={index}>
-                    <img src={news.imageLink} className='home-side__image' alt='asset' />
-                    <h5 className='home-side__title'>{news.message}</h5>
+            <h4 className='home-side__title'>Latest News:</h4>
+            {
+              news.news.reverse().slice(0, 1).map((news: INewsState, index: number) => (
+                <div className='home-side__container' key={index}>
+                  <img src={news.imageLink} className='home-side__image' alt='asset' />
+                  <h5 className='home-side__title'>{news.message}</h5>
+                </div>
+              ))
+            }
+          </div>
+          <div className="duo-wrapper">
+            {alerts.alerts.length === 0 ? (
+              <div className='home-side__empty'>
+                <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
+                <h4>There are no alerts at the moment!</h4>
+              </div>
+            ) : (
+                alerts.alerts.map((alert: IAlertsState, index: number) => (
+                  <div className='home-side__data' key={index}>
+                    <h4>Alerts: </h4>
+                    <h4>{alert.mission.description}</h4>
+                    <h4>{alert.mission.node}</h4>
+                    <h5>{alert.mission.faction}</h5>
+                    <Button
+                      buttonText="Details"
+                      buttonLink="/alert"
+                      buttonClass="button button-gold"
+                      
+                    />
                   </div>
                 ))
-              }
-            </div>
-            <div className="duo-wrapper">
-              {alertsData.length === 0 ? (
-                <div className='home-side__empty'>
-                  <FontAwesomeIcon icon={faExclamationTriangle} className='home-side__icon' />
-                  <h4>There are no alerts at the moment!</h4>
-                </div>
-              ) : (
-                  alertsData.map((alert: IAlertsState, index: number) => (
-                    <div className='home-side__data' key={index}>
-                      <h4>Alerts: </h4>
-                      <h4>{alert.mission.description}</h4>
-                      <h4>{alert.mission.node}</h4>
-                      <h5>{alert.mission.faction}</h5>
-                      <Button
-                        buttonText="Details"
-                        buttonLink="/alert"
-                        buttonClass="button button-gold"
-                      />
-                    </div>
-                  ), console.log(alertsData))
-                )}
-            </div>
+              )}
           </div>
           <div className="twitter">
             <div className="twitter-feed">
@@ -213,7 +205,7 @@ export default function Home() {
                 width: '400',
                 height: '600'
               }}
-              renderError={(_err: string) => <p className='twitter-title'>Could not load feed</p>}
+              renderError={(_err: ReactNode) => <p className='twitter-title'>Could not load feed</p>}
             />
           </div>
         </div>
@@ -224,7 +216,7 @@ export default function Home() {
             <div className='home-invasions__layout'>
               <div className='home-invasions__info'>
                 {
-                  invasionsData.slice(0, 4).map((invasion: IInvasions, index: number) => (
+                  itemRandomizer(invasions.invasions).slice(0, 4).map((invasion: IInvasions, index: number) => (
                     <div className='home-invasions__container' key={index}>
                       <h4 className='home-invasions__node'>{invasion.node}</h4>
                       <h5 className='home-invasions__desc'>{invasion.desc}</h5>
@@ -244,7 +236,7 @@ export default function Home() {
             </div>
           </div>
           <div className='home-invasions__wrap'>
-            <Button buttonText='Visit' buttonLink='/invasions' buttonClass='button-gold home-invasions__button' />
+            <Button buttonText='Visit' buttonLink='/invasions' buttonClass='button-gold home-invasions__button'  />
           </div>
         </div>
 
@@ -254,7 +246,7 @@ export default function Home() {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
           <div className='home-fissures__layout'>
             {
-              fissureData.slice(0, 3).map((fissure: IFissuresState, index: number) => (
+              itemRandomizer(fissures.fissures).slice(0, 3).map((fissure: IFissuresState, index: number) => (
                 <div className='home-fissures__container' key={index}>
                   <div className='home-fissures__wrapper'>
                     <h5>{fissure.tier} T{fissure.tierNum}</h5>
@@ -266,9 +258,11 @@ export default function Home() {
               ))
             }
           </div>
-          <Button buttonText='Visit' buttonLink='/fissures' buttonClass='button-gold home-fissures__button' />
+          <Button buttonText='Visit' buttonLink='/fissures' buttonClass='button-gold home-fissures__button'  />
         </div>
       </section>
     </>
   );
 }
+
+export default Home;
