@@ -8,10 +8,10 @@ const User = require("../../models/User");
 
 //@route POST api/user
 router.post("/", (req: express.Request, res: express.Response) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, displayName } = req.body;
 
   //Field validation
-  if (!firstName || !lastName || !email || !password) {
+  if (!firstName || !lastName || !displayName || !email || !password) {
     return res.status(400).json({
       message: "Please enter all fields."
     });
@@ -19,14 +19,17 @@ router.post("/", (req: express.Request, res: express.Response) => {
 
   //Check for existing user
   User.findOne({ email }).then(user => {
-    if (user)
+    if (user) {
+      console.log(user);
       return res
         .status(400)
         .json({ message: "User with this email already exists" });
+    }
 
     const newUser = new User({
       firstName,
       lastName,
+      displayName,
       email,
       password
     });
@@ -38,11 +41,14 @@ router.post("/", (req: express.Request, res: express.Response) => {
         newUser.password = hash;
         newUser.save().then(user => {
           jwt.sign(
-            { user: {
-              id: user._id,
-              name: user.name,
-              email: user.email
-            } },
+            {
+              user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                displayName: user.displayName
+              }
+            },
             config.get("jwtSecret"),
             { expiresIn: 3600 },
             (err: any, token: any) => {
@@ -52,7 +58,8 @@ router.post("/", (req: express.Request, res: express.Response) => {
                 user: {
                   id: user._id,
                   name: user.name,
-                  email: user.email
+                  email: user.email,
+                  displayName: user.displayName
                 },
                 message: "Signed up!"
               });

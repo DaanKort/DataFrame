@@ -3,16 +3,11 @@ import jwt = require("jsonwebtoken");
 
 function auth(req, res, next) {
   const token = req.header("x-auth-token");
-
-  //Check for token
   if (!token)
     return res.status(401).json({ message: "Unauthorized, no token present" });
 
   try {
-    //Verify token
     const decoded = jwt.verify(token, config.get("jwtSecret"));
-
-    //Add user from payload
     req.user = decoded;
     next();
   } catch (e) {

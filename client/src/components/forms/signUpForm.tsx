@@ -20,6 +20,7 @@ const SignUpForm: React.FC = () => {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
+        displayName: '',
         email: '',
         password: '',
     });
@@ -33,6 +34,7 @@ const SignUpForm: React.FC = () => {
             requestRegister({
                 firstName: user.firstName,
                 lastName: user.lastName,
+                displayName: user.displayName,
                 email: user.email,
                 password: user.password
             }),
@@ -56,6 +58,13 @@ const SignUpForm: React.FC = () => {
                 type="text"
                 name="lastName"
                 inputPlaceholder='Last Name'
+                inputWrapperClass='signup-input'
+                onInputChange={handleChange}
+            />
+            <Input
+                type="text"
+                name="displayName"
+                inputPlaceholder='Display name'
                 inputWrapperClass='signup-input'
                 onInputChange={handleChange}
             />

@@ -3,7 +3,6 @@ import mongoose = require("mongoose");
 import cors = require("cors");
 import * as http from "http";
 import config = require("config");
-const User = require("./models/User");
 
 const app = express();
 app.use(cors());
@@ -23,7 +22,7 @@ mongoose
 // Routes / Endpoints
 app.use("/api/user", require("./routes/api/user"));
 app.use("/api/auth", require("./routes/api/auth"));
-app.use("/api/user/:id", require("./routes/api/inventory"));
+app.use("/api/user/:id", require("./routes/api/favorites"));
 
 const PORT = process.env.PORT || 8080;
 

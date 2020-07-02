@@ -10,6 +10,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  displayName: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
@@ -23,9 +27,16 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  Inventory: {
+  favorites: {
     type: Array,
-    required: false
+  },
+  admin: {
+    type: Boolean,
+    default: false
+  },
+  maintainer: {
+    type: Boolean,
+    default: false
   }
 });
 

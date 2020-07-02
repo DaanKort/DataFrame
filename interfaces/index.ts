@@ -1,17 +1,17 @@
 
 import express = require("express");
 
-interface base {
+interface Base extends express.Request {
     updateOne: Function
+    params: any
 }
 
-export interface IAuthRequest extends express.Request {
+export interface IAuthRequest extends Base {
     user: {}
-    params: any
     id: number
 }
 
-export interface IUser extends base{
+export interface IUser extends Base {
     firstName: string;
     lastName: string;
     email: string;

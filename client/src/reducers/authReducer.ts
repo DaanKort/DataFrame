@@ -5,6 +5,7 @@ const defaultState: IUser = {
   email: "",
   firstName: "",
   lastName: "",
+  displayName: "",
   password: "",
   type: "",
   isAuthenticated: false,

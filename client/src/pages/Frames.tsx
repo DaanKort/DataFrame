@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Frames() {
   return (
-    <div>
-      hello, this frames
-    </div>
+    <h4>
+      Hello this frames
+    </h4>
   )
 }
