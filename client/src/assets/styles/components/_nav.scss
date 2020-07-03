@@ -173,6 +173,10 @@
       margin-top: 8px;
     }
 
+    &--email {
+      display: none;
+    }
+
 
     @include desktop {
       display: none;

@@ -22,7 +22,8 @@ export async function Register(user: IUser) {
       lastName: user.lastName,
       displayName: user.displayName,
       email: user.email,
-      password: user.password
+      password: user.password,
+      displayName: user.displayName
     }),
   })
     .then(function (response) {

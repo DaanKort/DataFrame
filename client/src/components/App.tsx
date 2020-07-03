@@ -1,6 +1,8 @@
+import Frames from '../pages/Frames';
+import FramesDetail from '../pages/FramesDetail';
 import React from "react";
 import "../assets/styles/main.scss";
-import store from "../store/store";
+import { store } from "../store/store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./nav/index";
@@ -18,13 +20,15 @@ export default () => (
     <Router>
       <Nav />
       <section className="content">
-        <Route exact path="/" component={Home} />
-        <Route path="/news" component={News} />
-        <Route path="/cycles" component={Cycles} />
-        <Route path="/fissures" component={Fissures} />
-        <Route path="/invasions" component={Invasions} />
-        <Route path="/sorties" component={Sorties} />
-        <Route path="/items" component={Items} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/news' component={News} />
+        <Route exact path='/cycles' component={Cycles} />
+        <Route exact path='/fissures' component={Fissures} />
+        <Route exact path='/invasions' component={Invasions} />
+        <Route exact path='/sorties' component={Sorties} />
+        <Route exact path='/items' component={Items} />
+        <Route exact path='/frames' component={Frames} />
+        <Route exact path='/frame/:name' component={FramesDetail} />
         <Route path="/register" component={SignUp} />
       </section>
     </Router>

@@ -12,17 +12,17 @@ interface InputProps {
 
 export default function Input(props: InputProps) {
 
-  const { 
-    onInputChange, 
-    inputClass, 
-    inputWrapperClass, 
+  const {
+    onInputChange,
+    inputClass,
+    inputWrapperClass,
     value,
-    name, 
-    inputPlaceholder, 
+    name,
+    inputPlaceholder,
     type }: InputProps = props;
 
   return (
-    <div className={`input-wrapper ${inputWrapperClass}`}>
+    <div className={`input-wrapper ${inputWrapperClass || ''}`}>
       <input type={type} onChange={onInputChange} value={value} name={name} className={`input ${inputClass || ''}`} placeholder={inputPlaceholder} />
     </div>
   )

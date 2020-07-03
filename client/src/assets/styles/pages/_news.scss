@@ -1,7 +1,8 @@
 .news {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;;
   justify-content: center;
+  align-items: center;
 
   @include desktop {
     margin-top: 40px;

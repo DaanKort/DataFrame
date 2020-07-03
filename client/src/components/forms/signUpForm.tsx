@@ -4,17 +4,17 @@ import Button from "../button/index";
 import Input from "../input/index"
 import { requestRegister } from "../../actions/actions";
 
-interface ISignUp {
-    auth: {
-        signUpErrorMessage: string;
+interface IError {
+    error: {
+        signUpErrorMessage: string
     }
-    message: string;
+    message: string
 }
 
 
 const SignUpForm: React.FC = () => {
-    const signupError: ISignUp = useSelector<ISignUp>(state => state.auth.signUpErrorMessage) as ISignUp;
-    const signupErrorMsg: string = signupError.message;
+    const signupError: IError = useSelector<IError>(state => state.error.signUpErrorMessage) as IError;
+    const signupErrorMsg: string = signupError && signupError.message;
     const dispatch = useDispatch();
 
     const [user, setUser] = useState({
@@ -36,16 +36,15 @@ const SignUpForm: React.FC = () => {
                 lastName: user.lastName,
                 displayName: user.displayName,
                 email: user.email,
-                password: user.password
+                password: user.password,
             }),
         );
-        !signupError && console.log('redirected');
     };
     return (
         <div className='form'>
             <h2 className='news__title'>Sign Up</h2>
             {
-                signupError && <p>{signupErrorMsg}</p>
+                <p>{signupErrorMsg}</p>
             }
             <Input
                 type="text"
@@ -64,7 +63,7 @@ const SignUpForm: React.FC = () => {
             <Input
                 type="text"
                 name="displayName"
-                inputPlaceholder='Display name'
+                inputPlaceholder='Display Name'
                 inputWrapperClass='signup-input'
                 onInputChange={handleChange}
             />
@@ -85,7 +84,7 @@ const SignUpForm: React.FC = () => {
             <Button
                 buttonText="Register"
                 buttonClass="button button-primary"
-                onClick={() => handleSignUp()}
+                onClick={handleSignUp}
             />
         </div>
     )

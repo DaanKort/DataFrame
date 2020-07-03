@@ -13,6 +13,7 @@
 @import './components/nav';
 @import './components/input';
 @import './components/glider';
+@import './components/loader';
 
 // pages
 @import './pages/hex';
@@ -20,4 +21,6 @@
 @import './pages/news';
 @import './pages/fissures';
 @import './pages/cycles';
+@import './pages/frames';
+@import './pages/framesDetail';
 @import './pages/signUp';
