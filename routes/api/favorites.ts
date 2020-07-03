@@ -9,7 +9,7 @@ interface IFavorites {
 }
 interface IITem {
   name: string
-}
+} 
 
 //@route put/user/:id
 router.put("/", auth, (req: IAuthRequest, res: express.Response) => {
