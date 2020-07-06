@@ -21,6 +21,7 @@ mongoose
 
 app.use("/api/user", require("./routes/api/user"));
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/test", require("./routes/api/toJSON"));
 
 const PORT = process.env.PORT || 8080;
 
