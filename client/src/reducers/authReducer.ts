@@ -7,7 +7,6 @@ const defaultState: IUser = {
   lastName: "",
   displayName: "",
   password: "",
-  displayName: "",
   type: "",
   isAuthenticated: false,
   isLoading: false,
