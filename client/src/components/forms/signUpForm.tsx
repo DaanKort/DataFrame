@@ -20,9 +20,9 @@ const SignUpForm: React.FC = () => {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
+        displayName: '',
         email: '',
         password: '',
-        displayName: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,9 +34,9 @@ const SignUpForm: React.FC = () => {
             requestRegister({
                 firstName: user.firstName,
                 lastName: user.lastName,
+                displayName: user.displayName,
                 email: user.email,
                 password: user.password,
-                displayName: user.displayName
             }),
         );
     };
@@ -85,7 +85,6 @@ const SignUpForm: React.FC = () => {
                 buttonText="Register"
                 buttonClass="button button-primary"
                 onClick={handleSignUp}
-                onTouch={handleSignUp}
             />
         </div>
     )

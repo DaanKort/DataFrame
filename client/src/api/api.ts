@@ -20,9 +20,9 @@ export async function Register(user: IUser) {
     body: JSON.stringify({
       firstName: user.firstName,
       lastName: user.lastName,
+      displayName: user.displayName,
       email: user.email,
       password: user.password,
-      displayName: user.displayName
     }),
   })
     .then(function (response) {
